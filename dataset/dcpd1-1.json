@@ -1,0 +1,122 @@
+[
+    {
+        "instruction": "Close the gripper.",
+        "code": "```python\npri.gripper_ctrl('close')```",
+        "goal_pos": "{\"gripper_pos\": [0.4489828263526714, -0.001447898260821684, 0.23839687836686901], \"gripper_state\": \"close\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.44098542724196843], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.44098542724196843], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.44098542724196843], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.44098542724196843]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Open the gripper.",
+        "code": "```python\npri.gripper_ctrl('open')```",
+        "goal_pos": "{\"gripper_pos\": [0.4489828263540483, -0.0014478973186704738, 0.23839687836744744], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.44098542724196843], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.44098542724196843], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.44098542724196843], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.44098542724196843]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Move the gripper 10cm to the right.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, -0.1, 0])\npri.move(target_pos, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.45063671484722007, -0.08501659769737586, 0.23858260900514178], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272546967], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272546967], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272546967], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272546967]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Move the gripper 10cm to the left.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, 0.1, 0])\npri.move(target_pos, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.45110489382119345, 0.08308890487972191, 0.23885297136449973], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272530886], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272530886], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272530886], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272530886]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Lift the gripper 15cm upwards.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, 0, 0.15])\npri.move(target_pos, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.45540858423314756, -0.0017265905206667986, 0.3764631871367418], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.44098542724484757], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.44098542724484757], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.44098542724484757], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.44098542724484757]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Lower the gripper 10cm downwards.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, 0, -0.1])\npri.move(target_pos, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.44848516948680756, -0.0011353712200797745, 0.15856039512682601], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.44098542727058926], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.44098542727058926], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.44098542727058926], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.44098542727058926]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Move the gripper 15cm forward.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0.15, 0, 0])\npri.move(target_pos, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.5803642865799253, -0.0014911656271581622, 0.24024324891629495], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272516836], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272516836], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272516836], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272516836]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Move the gripper 10cm backward.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([-0.1, 0, 0])\npri.move(target_pos, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.3699980157161885, -0.0013226813088892259, 0.23812678509212687], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.44098542727058926], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.44098542727058926], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.44098542727058926], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.44098542727058926]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Move the gripper to the home position.",
+        "code": "```python\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44898282635349884, -0.0014478976645460459, 0.23839687836722573], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.440985429883705], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.440985429883705], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.440985429883705], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.440985429883705]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Reset the gripper.",
+        "code": "```python\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44898282635349884, -0.0014478976645460459, 0.23839687836722573], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.440985429883705], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.440985429883705], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.440985429883705], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.440985429883705]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Move the gripper to the 20cm over the white mug.",
+        "code": "```python\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.2])\npri.move(target_pos, white_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.7613988397695717, -0.14027974461667772, 0.3087117760767832], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272422182], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272422182], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272422182], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272422182]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Move the gripper to the 10cm over the black mug.",
+        "code": "```python\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.1])\npri.move(target_pos, black_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.4420626977998025, -0.08428047127550069, 0.21264832026283215], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.44098542725045603], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.44098542725045603], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.44098542725045603], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.44098542725045603]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Move the gripper 5cm to the top of the green block.",
+        "code": "```python\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.05])\npri.move(target_pos, green_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.6465225806344219, -0.16706245974774384, 0.1843903177756045], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272421337], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272421337], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272421337], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272421337]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Please move the gripper 5cm to the top of the yellow cube.",
+        "code": "```python\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.05])\npri.move(target_pos, yellow_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.7029931203935343, -0.23360732342481866, 0.18395675079448331], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.44098542724203965], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.44098542724203965], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.44098542724203965], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.44098542724203965]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Please move the gripper 0.1m to the top of the red cube.",
+        "code": "```python\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.5368249591210414, 0.20982334776068268, 0.23294011874309878], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272432469], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272432469], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272432469], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272432469]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Move the gripper 0.05m over the blue block.",
+        "code": "```python\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.05])\npri.move(target_pos, blue_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.38357206557259804, 0.17310211311192114, 0.18246128486070928], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272429433], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272429433], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272429433], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272429433]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Grip the yellow block.",
+        "code": "```python\npri.grab('yellow_block')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4473822237824207, -0.001145269601209076, 0.23678369799966953], \"gripper_state\": \"close\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.4490943499187778, 0.00029089161089834904, 0.5424555286865753]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the red block.",
+        "code": "```python\npri.grab('red_block')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45097377502853747, 0.0041045913023726645, 0.23685652255310446], \"gripper_state\": \"close\", \"red_goal\": [0.45295983306590903, 0.0030333655147168574, 0.5400097572045462], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Please pick up the green cube.",
+        "code": "```python\npri.grab('green_block')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4488432907650911, -0.002928527171073245, 0.23688278489605658], \"gripper_state\": \"close\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.4490898191296773, -0.0027194415734193753, 0.5414068813292887], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Single_step_no_inference"
+    },
+    {
+        "instruction": "Please Grip the blue block.",
+        "code": "```python\npri.grab('blue_block')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44787084274120265, 0.012571767240441468, 0.2377720659783768], \"gripper_state\": \"close\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.4571003532626198, 0.011463574249673203, 0.5446455014279481], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Single_step_no_inference"
+    }
+]

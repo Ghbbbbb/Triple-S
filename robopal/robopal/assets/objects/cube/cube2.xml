@@ -1,0 +1,14 @@
+<mujoco>
+    <asset>
+        <texture name="block2_texture" type="2d" file="textures/1.png" />
+        <material name="block2_material" texture="block2_texture" />
+    </asset>
+
+    <worldbody>
+        <body name="block2" pos="0.5 0.0 0.46">
+            <joint name="block2:joint" type="free" damping="0.1" />
+            <geom name="block2" size="0.02 0.02 0.02" type="box" conaffinity="0" contype="0" group="1" density="0" material="block2_material" />
+            <geom name="block2_collision" size="0.02 0.02 0.02" type="box" conaffinity="1" condim="4" contype="1" group="4" mass="0.03" material="block2_material" />
+        </body>
+    </worldbody>
+</mujoco>

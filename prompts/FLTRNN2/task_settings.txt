@@ -1,0 +1,193 @@
+[task description]
+Move the gripper over a specified-weight block
+[role thought]
+First you need to konw the mass of specified-weight block by `pri.get_obj_mass()`, then get the obj_pose by `pri.get_obj_pose()`, then calculate the target_pos by `obj_pose + np.array([0, 0, z])`, here 'z' is the distance according to the insruction, finally move the gripper to target_pos by `pri.move()`.
+[examples]
+#example1
+user: Move the gripper 10cm on top of the heaviest movable block.
+you: "```python
+# get the mass of block1, block2,block3, block4
+block_masses={'block1':pri.get_obj_mass('block1'),'block2':pri.get_obj_mass('block2'),'block3':pri.get_obj_mass('block3'),'block4':pri.get_obj_mass('block4')}
+# get the pose of heaviest_movable_block
+sorted_blocks = sorted(block_masses.items(),key=lambda x: x[1])
+heaviest_movable_block = sorted_blocks[2][0]
+heaviest_pos, heaviest_quat = pri.get_obj_pose(heaviest_movable_block)
+# calculate the target position, then move to the target position
+target_pos = heaviest_pos + np.array([0, 0, 0.1])
+pri.move(target_pos, heaviest_quat)```"
+---
+
+[task description]
+Pick up a specified-weight block
+[role thought]
+First you need to konw the mass of specified-weight block by `pri.get_obj_mass()`, then you need to thought what block you need to pick(if the instruction has distance information like "farthest", "cloest", you need to calculate the distances between objects), then grab it by `pri.grab()`, finally reset to initial pose by `reset_robot()`.
+[examples]
+#example1
+user: please grab the lightest movable block.
+you: "```python
+# get the mass of block1, block2,block3, block4
+block_masses={'block1':pri.get_obj_mass('block1'),'block2':pri.get_obj_mass('block2'),'block3':pri.get_obj_mass('block3'),'block4':pri.get_obj_mass('block4')}
+# pick up the lightest_movable_block
+sorted_blocks = sorted(block_masses.items(),key=lambda x: x[1])
+lightest_movable_block = sorted_blocks[0][0]
+pri.grab(lightest_movable_block)
+# reset the robot
+pri.reset_robot()```"
+#example2
+user: Pick up the movable block closest to the fixed block.
+you: "```python
+# get the mass of block1, block2,block3, block4
+block_masses={'block1':pri.get_obj_mass('block1'),'block2':pri.get_obj_mass('block2'),'block3':pri.get_obj_mass('block3'),'block4':pri.get_obj_mass('block4')}
+# calculate the pose of lightest_movable_block, medium_weight_movable_block green_block, heaviest_movable_block, fixed_block
+sorted_blocks = sorted(block_masses.items(),key=lambda x: x[1])
+lightest_movable_block = sorted_blocks[0][0]
+medium_weight_movable_block = sorted_blocks[1][0]
+heaviest_movable_block = sorted_blocks[2][0]
+fixed_block = sorted_blocks[3][0]
+lightest_pos, lightest_quat = pri.get_obj_pose(lightest_movable_block)
+medium_pos, medium_quat = pri.get_obj_pose(medium_weight_movable_block)
+heaviest_pos, heaviest_quat = pri.get_obj_pose(heaviest_movable_block)
+fixed_pos, fixed_quat = pri.get_obj_pose(fixed_block)
+# calculate the distance between fixed block and other movable blocks
+distances={lightest_block:np.linalg.norm(lightest_pos-fixed_pos),medium_block:np.linalg.norm(medium_pos-fixed_pos),heaviest_block:np.linalg.norm(heaviest_pos-fixed_pos)}
+sorted_distances = sorted(distances.items(), key=lambda item:item[1])
+# pick up the cloest block
+cloest_obj = sorted_distances[0][0]
+pri.grab(cloest_obj)
+# reset the robot
+pri.reset_robot()```"
+---
+
+[task description]
+Pick up a specified-weight block and stack it on the other block.
+[role thought]
+First you need to konw the mass of specified-weight block by `pri.get_obj_mass()`, then to grab the specified block by `pri.grab()`, then calculate the transition_pos which is 0.1m above the stacked block position, then move to the transition_pos and open the gripper(if there has multi block need to stack, you should repreat above steps until all the block has been stacked), finally reset to initial pose by `reset_robot()`.
+[examples]
+#example1
+user: Pick up the heaviest movable block and place it in fixed block
+you:"```python
+# get the mass of block1, block2,block3, block4
+block_masses={'block1':pri.get_obj_mass('block1'),'block2':pri.get_obj_mass('block2'),'block3':pri.get_obj_mass('block3'),'block4':pri.get_obj_mass('block4')}
+# stack the heaviest_movable_block on the fixed_block
+sorted_blocks = sorted(block_masses.items(),key=lambda x: x[1])
+heaviest_movable_block = sorted_blocks[2][0]
+fixed_block = sorted_blocks[3][0]
+pri.grab(heaviest_movable_block)
+fixed_pos, fixed_quat = pri.get_obj_pose(fixed_block)
+transition_pos = fixed_pos + np.array([0, 0, 0.1])
+pri.move(transition_pos, fixed_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+#example2
+user:Stack the lightest and medium-weight movable cubes in order on top of the fixed block.
+you:"```python
+# get the mass of block1, block2,block3, block4
+block_masses={'block1':pri.get_obj_mass('block1'),'block2':pri.get_obj_mass('block2'),'block3':pri.get_obj_mass('block3'),'block4':pri.get_obj_mass('block4')}
+sorted_blocks = sorted(block_masses.items(),key=lambda x: x[1])
+lightest_movable_block = sorted_blocks[0][0]
+medium_weight_movable_block = sorted_blocks[1][0]
+fixed_block = sorted_blocks[3][0]
+# stack the lightest_movable_block on the fixed_block
+pri.grab(lightest_movable_block)
+fixed_pos, fixed_quat = pri.get_obj_pose(fixed_block)
+transition_pos = fixed_pos + np.array([0, 0, 0.1])
+pri.move(transition_pos, fixed_quat)
+pri.gripper_ctrl('open')
+# stack the medium_weight_movable_block on the lightest_movable_block
+pri.grab(medium_weight_movable_block)
+lightest_pos, lightest_quat = pri.get_obj_pose(lightest_movable_block)
+transition_pos = lightest_pos + np.array([0, 0, 0.1])
+pri.move(transition_pos, lightest_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```
+---
+
+[task description]
+Pick up a specified-weight block and place it on the mug.
+[role thought]
+First you need to konw the mass of specified-weight block by `pri.get_obj_mass()`, then to grab the specified block by `pri.grab()`, then calculate the transition_pos which is 0.15m above the stacked mug position, then move to the transition_pos and open the gripper, finally reset to initial pose by `reset_robot()`.
+[examples]
+#example1:
+user: Place the heaviest movable block in the dark colored mug.
+you:"```python
+# get the mass of block1, block2,block3, block4
+block_masses={'block1':pri.get_obj_mass('block1'),'block2':pri.get_obj_mass('block2'),'block3':pri.get_obj_mass('block3'),'block4':pri.get_obj_mass('block4')}
+# stack the heaviest_movable_block on the black_mug
+sorted_blocks = sorted(block_masses.items(),key=lambda x: x[1])
+heaviest_movable_block = sorted_blocks[2][0]
+pri.grab(heaviest_movable_block)
+black_pos, black_quat = pri.get_obj_pose('black_mug')
+transition_pos = black_pos + np.array([0, 0, 0.15])
+pri.move(transition_pos, black_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+---
+
+[task description]
+Move or Place the specified-weight block on a specified position.
+[role thought]
+First you need to konw the mass of specified-weight block by `pri.get_obj_mass()`, then to grab the specified block by `pri.grab()`, then calculate the target_pos by `obj_pose + np.array([x,y,z])`,here [x,y,z] is the position you need to fill according to the instruction, they obey the following match:{'forward':'+x','backward or behind':'-x','left':'+y','right':'-y','above':'+z'}, then calculate the transition_pos which is 0.1m above the target_pos, then move to the transition_pos and open the gripper, finally reset to initial pose by `reset_robot()`.
+[examples]
+#example1
+user: Please place the lightest movable block 15cm to the left of the white mug.
+you:"```python
+# get the mass of block1, block2,block3, block4
+block_masses={'block1':pri.get_obj_mass('block1'),'block2':pri.get_obj_mass('block2'),'block3':pri.get_obj_mass('block3'),'block4':pri.get_obj_mass('block4')}
+# pick up the lightest_movable_block
+sorted_blocks = sorted(block_masses.items(),key=lambda x: x[1])
+lightest_movable_block = sorted_blocks[0][0]
+pri.grab(lightest_movable_block)
+# calculate the target position and transition position, left is +y, so 15cm left is np.array([0, 0.15, 0])
+white_pos, white_quat = pri.get_obj_pose('white_mug')
+target_pos = white_pos + np.array([0, 0.15, 0])
+transition_pos = target_pos + np.array([0, 0, 0.15])
+# move to the transition position then open the gripper
+pri.move(transition_pos, white_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+#example2
+user: Please place the medium weight movable block 12cm behind the fixed block, then move the heaviest movable block 6cm forward to the lightest movable block.
+you:"```python
+# get the mass of block1, block2,block3, block4
+block_masses={'block1':pri.get_obj_mass('block1'),'block2':pri.get_obj_mass('block2'),'block3':pri.get_obj_mass('block3'),'block4':pri.get_obj_mass('block4')}
+sorted_blocks = sorted(block_masses.items(),key=lambda x: x[1])
+lightest_movable_block = sorted_blocks[0][0]
+medium_weight_movable_block = sorted_blocks[0][0]
+heaviest_movable_block = sorted_blocks[2][0]
+fixed_block = sorted_blocks[3][0]
+# pick up the medium_weight_movable_block
+pri.grab(medium_weight_movable_block)
+# calculate the target position and transition position, behind is -x, so 12cm behind is np.array([-0.12, 0, 0])
+fixed_pos, fixed_quat = pri.get_obj_pose(fixed_block)
+target_pos = fixed_pos + np.array([-0.12, 0, 0])
+transition_pos = target_pos + np.array([0, 0, 0.1])
+# move to the transition position then open the gripper
+pri.move(transition_pos, fixed_quat)
+pri.gripper_ctrl('open')
+# pick up the heaviest_movable_block
+pri.grab(heaviest_movable_block)
+# calculate the target position and transition position, forward is +x, so 6cm forward is np.array([0.06, 0, 0])
+lightest_pos, lightest_quat = pri.get_obj_pose(lightest_movable_block)
+target_pos = lightest_pos + np.array([0.06, 0, 0])
+transition_pos = target_pos + np.array([0, 0, 0.1])
+# move to the transition position then open the gripper
+pri.move(transition_pos, fixed_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+---
+
+[task description]
+You can use the pri.say() func if the existing functions cannot solve user robot instructions:
+[role thought]
+No existing object or no matching apis to solve the user's instruction.
+[examples]
+#example1
+user:please write a word with the robotic arm.
+you:"```python
+pri.say('Sorry, I don't understand this instruction because I don't have any functions available in my library')```"
+---

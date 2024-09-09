@@ -1,0 +1,542 @@
+[
+    {
+        "instruction": "Please move 15cm to your left side and then open your gripper.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, 0.15, 0])\npri.move(target_pos, current_quat)\npri.gripper_ctrl('open')```",
+        "goal_pos": "{\"gripper_pos\": [0.45015490227007426, 0.1495510520761068, 0.23942380746226727], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please move 0.1m to your right side and then close your claw.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, -0.1, 0])\npri.move(target_pos, current_quat)\npri.gripper_ctrl('close')```",
+        "goal_pos": "{\"gripper_pos\": [0.4491448333481605, -0.10198101051554853, 0.23870279323435822], \"gripper_state\": \"close\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please move 20cm to your left, then 15cm above you.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, 0.2, 0])\npri.move(target_pos, current_quat)\ntarget_pos2 = target_pos + np.array([0, 0, 0.15])\npri.move(target_pos2, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.45433933784779107, 0.19911503720685642, 0.38117779892136866], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please move 0.2m to your right, then 15cm above you.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, -0.2, 0])\npri.move(target_pos, current_quat)\ntarget_pos2 = target_pos + np.array([0, 0, 0.15])\npri.move(target_pos2, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.4538736109426821, -0.20269662875218228, 0.3821293807378367], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please move 20 cm to the left, then 15cm in front of you, and finally 10cm to the right.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, 0.2, 0])\npri.move(target_pos, current_quat)\ntarget_pos2 = target_pos + np.array([0.15, 0, 0])\npri.move(target_pos2, current_quat)\ntarget_pos3 = target_pos2 + np.array([0, -0.1, 0])\npri.move(target_pos3, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.60037666068604, 0.1122966311663504, 0.23960790998498444], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please move 20 cm to the right, then 15cm in front of you, and finally 10cm to the left, and then open your claw.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, -0.2, 0])\npri.move(target_pos, current_quat)\ntarget_pos2 = target_pos + np.array([0.15, 0, 0])\npri.move(target_pos2, current_quat)\ntarget_pos3 = target_pos2 + np.array([0, 0.1, 0])\npri.move(target_pos3, current_quat)\npri.gripper_ctrl('open')```",
+        "goal_pos": "{\"gripper_pos\": [0.6008009161453549, -0.10163739546113604, 0.23938153492100273], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please open your clamp first, then move 10 cm to the left, then 15cm in front of you, and finally 15cm to the right.",
+        "code": "```python\npri.gripper_ctrl('open')\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, 0.1, 0])\npri.move(target_pos, current_quat)\ntarget_pos2 = target_pos + np.array([0.15, 0, 0])\npri.move(target_pos2, current_quat)\ntarget_pos3 = target_pos2 + np.array([0, -0.15, 0])\npri.move(target_pos3, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.7520743003448283, -0.13954122309405043, 0.24067529972898166], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please move 10cm to your right, then 10cm to your front, then 10cm to your left, and finally 10cm to your back.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, -0.1, 0])\npri.move(target_pos, current_quat)\ntarget_pos2 = target_pos + np.array([0.1, 0, 0])\npri.move(target_pos2, current_quat)\ntarget_pos3 = target_pos2 + np.array([0, 0.1, 0])\npri.move(target_pos3, current_quat)\ntarget_pos4 = target_pos3 + np.array([-0.1, 0, 0])\npri.move(target_pos4, current_quat)```",
+        "goal_pos": "{\"gripper_pos\": [0.4632526611552439, -0.0026042584071659896, 0.23791234096801744], \"gripper_state\": \"initial\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please move 10cm to your right, then close your claw, then move 15cm to the front, then release your claw.",
+        "code": "```python\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, -0.1, 0])\npri.move(target_pos, current_quat)\npri.gripper_ctrl('close')\ntarget_pos2 = target_pos + np.array([0.15, 0, 0])\npri.move(target_pos2, current_quat)\npri.gripper_ctrl('open')```",
+        "goal_pos": "{\"gripper_pos\": [0.6004907024150319, -0.10199506083892039, 0.2394685004021176], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please open your gripper first, then move 20cm to the right, then 15cm to the front, then 8cm to the left, then 10cm to the back, and finally close your gripper.",
+        "code": "```python\npri.gripper_ctrl('open')\ncurrent_pos, current_quat = pri.get_current_pose()\ntarget_pos = current_pos + np.array([0, -0.2, 0])\npri.move(target_pos, current_quat)\ntarget_pos2 = target_pos + np.array([0.15, 0, 0])\npri.move(target_pos2, current_quat)\ntarget_pos3 = target_pos2 + np.array([0, 0.08, 0])\npri.move(target_pos3, current_quat)\ntarget_pos4 = target_pos3 + np.array([-0.1, 0, 0])\npri.move(target_pos4, current_quat)\npri.gripper_ctrl('close')```",
+        "goal_pos": "{\"gripper_pos\": [0.6482932950467699, -0.22093719594440772, 0.23845922165142802], \"gripper_state\": \"close\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the blue block and position it 10cm right to the red block.",
+        "code": "```python\npri.grab('blue_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, -0.1, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4541851959477599, 0.005602153015832553, 0.23712282802405066], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.545704698339761, 0.1307255688918476, 0.4413656790655994], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the blue cube and position it 10cm left to the white mug.",
+        "code": "```python\npri.grab('blue_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0.1, 0.1])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4582478298718905, -0.0029069303627722596, 0.2369513060635286], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.7775035220512176, -0.05250788603812295, 0.4414003988938382], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the blue block and place it 0.15m behind the yellow block.",
+        "code": "```python\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([-0.15, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4530577855651444, -0.008504898729508294, 0.237256794144374], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.568148316554303, -0.2292889213104673, 0.4409862763235546], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the blue block and place it 10cm in front of the black mug.",
+        "code": "```python\npri.grab('blue_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0.1, 0, 0.1])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4580228841644996, -0.008510243409695936, 0.23678509830654187], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.5540456829324969, -0.09512872515270801, 0.4412547234144763], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the red block and position it 12cm right to the blue block.",
+        "code": "```python\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, -0.12, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44221523867491935, 0.007624315917720798, 0.23831697348019915], \"gripper_state\": \"open\", \"red_goal\": [0.38737350807672777, 0.06548118013278975, 0.44098542620921033], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the red cube and position it 15cm left to the white mug.",
+        "code": "```python\npri.grab('red_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0.15, 0.1])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45882385271619824, -0.0019704852668827374, 0.23701731668025133], \"gripper_state\": \"open\", \"red_goal\": [0.7751008468799995, 0.0013365709995763573, 0.44103511411561663], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the red block and place it 0.15m behind the yellow block.",
+        "code": "```python\npri.grab('red_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([-0.15, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4530453397092132, -0.008528434917943261, 0.2372565427112227], \"gripper_state\": \"open\", \"red_goal\": [0.5650458336132599, -0.23373906991893423, 0.44098542721109724], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the red block and place it 14cm in front of the black mug.",
+        "code": "```python\npri.grab('red_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0.14, 0, 0.1])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4568649876645915, -0.006110497254078279, 0.23630179538138768], \"gripper_state\": \"open\", \"red_goal\": [0.5936395251380387, -0.09351252127954207, 0.44098526513249353], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the green block and position it 8cm right to the red block.",
+        "code": "```python\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, -0.08, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45391631890064754, 0.006540503505227399, 0.23669170089807084], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.5381022359973557, 0.1442660503840682, 0.44098542315211464], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the green cube and position it 13cm left to the white mug.",
+        "code": "```python\npri.grab('green_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0.13, 0.1])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4588036241707173, -0.0024795745213143155, 0.2369500790266033], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.77062456242006, -0.02134185837114475, 0.44098520162034177], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the green block and place it 0.17m behind the yellow block.",
+        "code": "```python\npri.grab('green_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([-0.17, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4520675587865677, -0.009011946657670581, 0.23714958573454453], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.5344568870421456, -0.23681210116948082, 0.44098542749785946], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the green block and place it 20cm in front of the black mug.",
+        "code": "```python\npri.grab('green_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0.2, 0, 0.1])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4583126737855171, -0.005732010047102875, 0.2364575443488604], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6384465253147598, -0.10022044025479047, 0.44098542732759805], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the yellow block and position it 10cm right to the red block.",
+        "code": "```python\npri.grab('yellow_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, -0.1, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45337627041935585, 0.005330634123270536, 0.23683651361842367], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.5406292161566374, 0.1255475411398638, 0.44098419671465966]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the yellow cube and position it 13cm right to the white mug.",
+        "code": "```python\npri.grab('yellow_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, -0.13, 0.1])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.455593967222583, -0.005578879419758199, 0.23689482781628984], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.768064543314668, -0.27829034837502176, 0.4409877677994305]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the yellow block and place it 0.12m behind the green block.",
+        "code": "```python\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([-0.12, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45225280976407545, -0.008097497600361919, 0.2368272281527753], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.52771370456791, -0.1737817958782708, 0.4410228294162118]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the yellow block and place it 18cm right to the black mug.",
+        "code": "```python\npri.grab('yellow_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, -0.18, 0.1])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4511875863971866, -0.011597036683968175, 0.23672135287185053], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.43748426272401525, -0.274348203255731, 0.4409784367143282]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the red block and place it on the blue block.",
+        "code": "```python\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4475350249118585, 0.014014629264900675, 0.23855558278476435], \"gripper_state\": \"open\", \"red_goal\": [0.38430545284421447, 0.18188441870167082, 0.48094034817558523], \"blue_goal\": [0.3790447628879655, 0.18308911006395806, 0.4409708602719784], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the green block and stack it on top of the blue block.",
+        "code": "```python\npri.grab('green_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4476921587685429, 0.013182704427861874, 0.2386042739961977], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3789182464329545, 0.1830983772424934, 0.44097086695731563], \"green_goal\": [0.3801657481304738, 0.17945946814944408, 0.4809498837179775], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the yellow block on top of the blue block.",
+        "code": "```python\npri.grab('yellow_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4473366713768422, 0.014108666627017744, 0.23842903314035974], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.37891443828393534, 0.1829891847523431, 0.44097086478298836], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.3878310114304674, 0.18159525701023133, 0.4810500927026747]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the blue block and place it on the red block.",
+        "code": "```python\npri.grab('blue_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45533450140288106, 0.010030094372466491, 0.23705213396712438], \"gripper_state\": \"open\", \"red_goal\": [0.5372580096972291, 0.22535388524325584, 0.4409708658771622], \"blue_goal\": [0.5437381012119822, 0.22877360204593447, 0.48128144984617843], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the green block and stack it on top of the red block.",
+        "code": "```python\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4540413738544121, 0.008591705635417096, 0.23664270598850073], \"gripper_state\": \"open\", \"red_goal\": [0.5372631907013925, 0.22534934135143955, 0.44097086038115146], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.5399922600855577, 0.22525651820969098, 0.4809506323888379], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the yellow block on top of the red block.",
+        "code": "```python\npri.grab('yellow_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45347401056896475, 0.007894605071192837, 0.23682180416409332], \"gripper_state\": \"open\", \"red_goal\": [0.5371917418825746, 0.2252358467153457, 0.4409708525915374], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.542684001123611, 0.22650852281457023, 0.48100259153233077]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the blue block and place it on the green block.",
+        "code": "```python\npri.grab('blue_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4553658996371863, -0.00607983225192331, 0.23710275572051814], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.6605508503060972, -0.18221774168060734, 0.48130893050655466], \"green_goal\": [0.6493249318282263, -0.1719865480490623, 0.4409708660978287], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the red block and stack it on top of the green block.",
+        "code": "```python\npri.grab('red_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4553525213691295, -0.006077078765511133, 0.23708518384170557], \"gripper_state\": \"open\", \"red_goal\": [0.6586239041955286, -0.1810499306918204, 0.48096948518023014], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493221281901856, -0.1719862680900978, 0.44097086398114865], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the yellow block on top of the green block.",
+        "code": "```python\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45481164761147136, -0.0057820152202279615, 0.23702102555247268], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493335261763593, -0.17199149155762258, 0.4409708603679063], \"yellow_goal\": [0.6497910571714807, -0.17172938025224999, 0.48096356129586826]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the blue block and place it on the yellow block.",
+        "code": "```python\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45583559574863175, -0.005420687410587863, 0.23728201465035964], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.7194132276277881, -0.2272253843147505, 0.48101158640985064], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040604104647498, -0.23978566171635263, 0.4409708659310942]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the green block and stack it on top of the yellow block.",
+        "code": "```python\npri.grab('green_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45525477524959124, -0.005474313004967202, 0.23735334840590144], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.7103776220097523, -0.23923205157434216, 0.48093890699219444], \"yellow_goal\": [0.7040830534137764, -0.23963867578499734, 0.4409708606647589]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the red block on top of the yellow block.",
+        "code": "```python\npri.grab('red_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4558350084085929, -0.005419180051453322, 0.23728197265697853], \"gripper_state\": \"open\", \"red_goal\": [0.716512583642191, -0.23053889690654722, 0.4809301103878022], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040800708914972, -0.23975454944943225, 0.4409708614582812]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the blue square on the red square first, and then put the green square on the blue square.",
+        "code": "```python\npri.grab('blue_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45447070219064084, 0.008776336359883766, 0.23832635779490402], \"gripper_state\": \"open\", \"red_goal\": [0.5372813605648542, 0.22536616915726412, 0.440956309005069], \"blue_goal\": [0.5440286079856921, 0.22888893921048875, 0.4809092011437959], \"green_goal\": [0.5527348335141836, 0.23210445687694148, 0.5208811158409705], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the green block on the red block, then stack the yellow block on top.",
+        "code": "```python\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45470780120142773, 0.00980585267397801, 0.2381830340448417], \"gripper_state\": \"open\", \"red_goal\": [0.5372847591444291, 0.22536048176216902, 0.4409563099322267], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.5400648797502571, 0.22528346200866067, 0.4809079164675333], \"yellow_goal\": [0.5405466574129097, 0.22496571273097296, 0.5208989400773165]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the yellow and blue cubes on top of the red cube in order.",
+        "code": "```python\npri.grab('yellow_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4539369636852605, 0.007964730173337611, 0.238382095942885], \"gripper_state\": \"open\", \"red_goal\": [0.5371839364666232, 0.22522651638581603, 0.44095630167219524], \"blue_goal\": [0.5517793142749366, 0.23213406866138023, 0.5212835612832807], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.5426463544133123, 0.22647584713933477, 0.4809155906275501]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the red square on the blue square first, and then put the green square on the red square.",
+        "code": "```python\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44501691446776603, 0.011758732379340473, 0.23920021624883175], \"gripper_state\": \"open\", \"red_goal\": [0.38434190087651965, 0.1818656784923701, 0.48089299868639324], \"blue_goal\": [0.379051289009148, 0.18308361696988903, 0.4409563059532703], \"green_goal\": [0.3848808038430012, 0.17935202352575633, 0.5208778074518589], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the green block on the blue block, then stack the yellow block on top.",
+        "code": "```python\npri.grab('green_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44533450657027474, 0.010351076602069489, 0.23937323104470715], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.37894773685233313, 0.18310111066575646, 0.4409563094257935], \"green_goal\": [0.3801524322664894, 0.1793785784110476, 0.4809346079547192], \"yellow_goal\": [0.3867752430319977, 0.17692023908120516, 0.5208917829628226]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the yellow and red cubes on top of the blue cube in order.",
+        "code": "```python\npri.grab('yellow_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44520110467879, 0.012185018838506095, 0.23940214384697162], \"gripper_state\": \"open\", \"red_goal\": [0.40131255542108474, 0.17882526946391789, 0.5208609292921975], \"blue_goal\": [0.3789203299473706, 0.18297988106173782, 0.44095630931716595], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.38773605743008843, 0.18154891288319083, 0.4809160011304795]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the blue square on the green square first, and then put the red square on the blue square.",
+        "code": "```python\npri.grab('blue_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45567237180028103, -0.006232467379487268, 0.23784972556079426], \"gripper_state\": \"open\", \"red_goal\": [0.6744181040238516, -0.19260619503500814, 0.5211038806104926], \"blue_goal\": [0.6608489302008057, -0.18243352302185142, 0.48086391618201346], \"green_goal\": [0.6493416641954443, -0.17200522066771654, 0.440956316367672], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the red block on the green block, then stack the yellow block on top.",
+        "code": "```python\npri.grab('red_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.455478038366435, -0.006030181704265364, 0.23788008677930178], \"gripper_state\": \"open\", \"red_goal\": [0.6572925788617945, -0.17983691933718565, 0.4808791222053708], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6491794457860653, -0.17175860750571526, 0.4409563093997197], \"yellow_goal\": [0.6586377553294628, -0.18319851164420892, 0.5208561821663322]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the yellow and blue cubes on top of the green cube in order.",
+        "code": "```python\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4556379792762327, -0.006226589598087229, 0.23793047173461196], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.6624493796840523, -0.18156387220225265, 0.5212401282150722], \"green_goal\": [0.6493289789920883, -0.17199260658399168, 0.4409563103589825], \"yellow_goal\": [0.6497687457963287, -0.17173964335551295, 0.48094185193350014]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the blue square on the yellow square first, and then put the red square on the blue square.",
+        "code": "```python\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45651465964681237, -0.0054961631493231815, 0.23788453769480994], \"gripper_state\": \"open\", \"red_goal\": [0.7357913540367891, -0.21636496183494897, 0.5209165115630698], \"blue_goal\": [0.7195380096020549, -0.22710895342309712, 0.4808157927407183], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.704083130318529, -0.23976565765837737, 0.4409563228383565]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the red block on the yellow block, then stack the green block on top.",
+        "code": "```python\npri.grab('red_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4558469551142573, -0.005463380795295339, 0.2379001392795292], \"gripper_state\": \"open\", \"red_goal\": [0.716502271981959, -0.2305514308979881, 0.4808834599904895], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.7243972687678962, -0.22837419800657022, 0.5209521845940713], \"yellow_goal\": [0.7040746678733314, -0.23976161507064286, 0.4409563142749391]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the green and blue cubes on top of the yellow cube in order.",
+        "code": "```python\npri.grab('green_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45574987690610685, -0.005704550827269386, 0.237913925439103], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.727054370539563, -0.22871920198537912, 0.5211399529934143], \"green_goal\": [0.710395249878631, -0.23925453260941365, 0.48089393137742936], \"yellow_goal\": [0.7040784672852488, -0.23965218204578612, 0.4409563121934449]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the red square on the blue square first, then put the green square on the red square, and finally to put the yellow square on the green square.",
+        "code": "```python\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44554136860334853, 0.010023805802307554, 0.24172805375293188], \"gripper_state\": \"open\", \"red_goal\": [0.3844194128149056, 0.18185349572534396, 0.48084433540345994], \"blue_goal\": [0.3790623866090988, 0.1830809448124881, 0.44094177443742194], \"green_goal\": [0.3849848300052852, 0.17922551809383053, 0.5208218131076402], \"yellow_goal\": [0.39666380704083726, 0.18006849316425486, 0.5607690962135986]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the green block on the blue block, then place the yellow block on the green block, and finally to stack the red block on top.",
+        "code": "```python\npri.grab('green_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44582894301630777, 0.009443289015707443, 0.24139074931122212], \"gripper_state\": \"open\", \"red_goal\": [0.39749100517175845, 0.1763480172650048, 0.5611124712063237], \"blue_goal\": [0.3789312015998874, 0.18310126792670361, 0.44094177722173994], \"green_goal\": [0.380097513445835, 0.17939041399825584, 0.4809121595519586], \"yellow_goal\": [0.3867083381396941, 0.17699051002455368, 0.5208572287871096]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the yellow, red and green cubes on top of the blue cube in order.",
+        "code": "```python\npri.grab('yellow_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4465119080168657, 0.010093751880113511, 0.24125699711185938], \"gripper_state\": \"open\", \"red_goal\": [0.4017540633892726, 0.17882692469188652, 0.5206626913021793], \"blue_goal\": [0.37893222939914023, 0.18297798782255445, 0.4409418045150554], \"green_goal\": [0.41201303425001856, 0.18426043113671503, 0.560555913247932], \"yellow_goal\": [0.38791070329348515, 0.18153337701890904, 0.4808221216329919]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the yellow square on the red square first, then put the blue square on the yellow square, and finally to put the green square on the blue square.",
+        "code": "```python\npri.grab('yellow_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45497852318351256, 0.008930828344013268, 0.2397614434452166], \"gripper_state\": \"open\", \"red_goal\": [0.537204883556402, 0.22523558038087638, 0.44094178145276225], \"blue_goal\": [0.5523112075349793, 0.2323857951847192, 0.5208127422240421], \"green_goal\": [0.5629294342642583, 0.23717766029867707, 0.5607726874368009], \"yellow_goal\": [0.542766862894797, 0.22653338919243554, 0.4808784481314646]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the blue block on the red block, then place the green block on the blue block, and finally to stack the yellow block on top.",
+        "code": "```python\npri.grab('blue_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4539256847842284, 0.007590128269772606, 0.23926485498647393], \"gripper_state\": \"open\", \"red_goal\": [0.537300853270258, 0.22537081181698337, 0.44094179774809766], \"blue_goal\": [0.5441670842917937, 0.22893029067110054, 0.4808694796063055], \"green_goal\": [0.5530384793337096, 0.2322075261170927, 0.5207730937948691], \"yellow_goal\": [0.5579098583504697, 0.23178623423498057, 0.5607333322975349]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the green, yellow and blue cubes on top of the red cube in order.",
+        "code": "```python\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4551855758468292, 0.009922833615153647, 0.2402311148729957], \"gripper_state\": \"open\", \"red_goal\": [0.5372719741983731, 0.22535334613849078, 0.44094177225424935], \"blue_goal\": [0.5528582727501733, 0.22516110791983557, 0.5615403455806915], \"green_goal\": [0.5400162728959034, 0.22525451765896445, 0.48091142416338134], \"yellow_goal\": [0.5405222759021031, 0.22483823532962877, 0.520896618340759]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the yellow square on the green square first, then put the red square on the yellow square, and finally to put the blue square on the red square.",
+        "code": "```python\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4578766446651454, -0.007194866847244658, 0.239136167017915], \"gripper_state\": \"open\", \"red_goal\": [0.661968450242101, -0.18139236540106654, 0.5208274458133145], \"blue_goal\": [0.6761991399736224, -0.18889964195305023, 0.561172582916626], \"green_goal\": [0.6493411756977264, -0.1720058403754092, 0.4409417844266359], \"yellow_goal\": [0.6498279991202542, -0.17179372836006854, 0.4809190581939214]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the red block on the green block, then place the yellow block on the red block, and finally to stack the blue block on top.",
+        "code": "```python\npri.grab('red_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45715074842229136, -0.006910616070975748, 0.23899027746561446], \"gripper_state\": \"open\", \"red_goal\": [0.6573189019760797, -0.17990254682390258, 0.48083347668393167], \"blue_goal\": [0.671765966568532, -0.19191238170871866, 0.5611062340105799], \"green_goal\": [0.6491794288039444, -0.17176576351503958, 0.44094179013118145], \"yellow_goal\": [0.6586800876106612, -0.18332860581067284, 0.520794884961986]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the blue, yellow and red cubes on top of the green cube in order.",
+        "code": "```python\npri.grab('blue_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4564933079833904, -0.006433045059396571, 0.2388698205327638], \"gripper_state\": \"open\", \"red_goal\": [0.6713938274344449, -0.18877976446502384, 0.5611456128924681], \"blue_goal\": [0.6576176176244726, -0.17896828023527145, 0.4808997046901098], \"green_goal\": [0.6490718485728187, -0.17158201325668732, 0.44094178600507], \"yellow_goal\": [0.6576523287478033, -0.17956735852352662, 0.5208843858906761]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the green square on the yellow square first, then put the red square on the green square, and finally to put the blue square on the red square.",
+        "code": "```python\npri.grab('green_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4560986354581388, -0.005437589889319236, 0.2384770645523862], \"gripper_state\": \"open\", \"red_goal\": [0.7284321988572225, -0.22695683516107212, 0.5205641298761102], \"blue_goal\": [0.7454331850230846, -0.21720319957841572, 0.5608076658473075], \"green_goal\": [0.7106029549685918, -0.23911896670943936, 0.48083494032035845], \"yellow_goal\": [0.7041066727999512, -0.2396319482266351, 0.44094181915867237]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the red block on the yellow block, then place the green block on the red block, and finally to stack the blue block on top.",
+        "code": "```python\npri.grab('red_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45660834839297043, -0.005709015570944841, 0.23850269852737832], \"gripper_state\": \"open\", \"red_goal\": [0.7167976514868886, -0.2303409053355501, 0.4807684065120521], \"blue_goal\": [0.7435055624140953, -0.2192080582521465, 0.5608664854551991], \"green_goal\": [0.7250311216340835, -0.2279315143281808, 0.5206265111160788], \"yellow_goal\": [0.704101898638365, -0.23974533068039589, 0.4409418284042488]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Stack the blue, green and red cubes on top of the yellow cube in order.",
+        "code": "```python\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45662181963842174, -0.005616461815453222, 0.23850837835251598], \"gripper_state\": \"open\", \"red_goal\": [0.7477619777616781, -0.21227725614524376, 0.560457313100879], \"blue_goal\": [0.7203291431656862, -0.2262953450657769, 0.4807084816586814], \"green_goal\": [0.7291432947891581, -0.22108016932745583, 0.5203265562042867], \"yellow_goal\": [0.7040988934218263, -0.23975847937901423, 0.440941826854291]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the blue square in the black cup.",
+        "code": "```python\npri.grab('blue_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4479902218475771, -0.01510735065299225, 0.2405485663744304], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.45696620921956915, -0.0965355591884139, 0.44145604436947966], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the red cube and place it on the black mug.",
+        "code": "```python\npri.grab('red_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4473911090043061, -0.013597761772209598, 0.23986061092085026], \"gripper_state\": \"open\", \"red_goal\": [0.4520656589091759, -0.09686027566498318, 0.44098542662586493], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the green block and place it on the black mug.",
+        "code": "```python\npri.grab('green_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4473973806459677, -0.014196522688154172, 0.23997910144964757], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.4421959372477968, -0.09614438217563534, 0.4409852633130375], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the yellow block into the balck mug.",
+        "code": "```python\npri.grab('yellow_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44752332611744816, -0.01213623089849384, 0.23965504111720776], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.44189921250125963, -0.09822577176723968, 0.44106476570180503]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the blue square in the white cup.",
+        "code": "```python\npri.grab('blue_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45656951002887625, -0.004353680443126485, 0.23752380378691257], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.7787252985793175, -0.1555373461552459, 0.44148282416372575], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the red cube and place it on the white mug.",
+        "code": "```python\npri.grab('red_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45656202535350043, -0.00436594002623938, 0.237516870636806], \"gripper_state\": \"open\", \"red_goal\": [0.7770124308464101, -0.15317701509527737, 0.44112181199138606], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the green block and place it on the white mug.",
+        "code": "```python\npri.grab('green_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4571292637530059, -0.004483129932589993, 0.23759134184405467], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.7691426789370281, -0.14629278490032951, 0.44097864546837223], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the yellow block into the white mug.",
+        "code": "```python\npri.grab('yellow_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4565463046304906, -0.0043856474719165236, 0.23751298208542787], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7684495090903805, -0.144381448635487, 0.44098542610867963]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the blue square on the black cup first, and then put the red square on the blue square.",
+        "code": "```python\npri.grab('blue_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4508014059557709, -0.013197871476443215, 0.23700398804184125], \"gripper_state\": \"open\", \"red_goal\": [0.46593553234876905, -0.09297520441809076, 0.4809360793458645], \"blue_goal\": [0.45722366828205524, -0.09650921932529946, 0.4409708599349679], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the red block and place it on the black mug first, then stack the green block on top of the red block.",
+        "code": "```python\npri.grab('red_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4503773344023712, -0.015237777658361946, 0.2370253068337363], \"gripper_state\": \"open\", \"red_goal\": [0.45194948539587726, -0.0968716772126787, 0.440970862275089], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.4531460703517144, -0.09400291454612193, 0.48096075108822783], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the green block and place it on the black mug first, then put the blue block on top of the green block.",
+        "code": "```python\npri.grab('green_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45134300963729346, -0.0173064415101037, 0.23846926317247025], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.45761615688004176, -0.09510600734906188, 0.4812426473218345], \"green_goal\": [0.4421773638860784, -0.09615410151437241, 0.44097086793287005], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the yellow block on the black mug, then place the blue block on the yellow block.",
+        "code": "```python\npri.grab('yellow_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4511509012087731, -0.013365575126697043, 0.23874249983511836], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.4547722965210681, -0.09306517380821194, 0.48128768697404434], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.4419563181395366, -0.09827865486317151, 0.44097087188413775]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the blue square on the white cup first, and then put the yellow square on the blue square.",
+        "code": "```python\npri.grab('blue_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4567624928906344, -0.004493027736191237, 0.2372893914420286], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.7791059134016005, -0.15575955687231263, 0.4409708608400164], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7811678296165228, -0.15854686176721142, 0.4809503630659025]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the red block and place it on the white mug first, then stack the green block on top of the red block.",
+        "code": "```python\npri.grab('red_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45668344900244295, -0.004358645083703529, 0.23718183746079063], \"gripper_state\": \"open\", \"red_goal\": [0.7770914510304893, -0.15314196984746334, 0.4409708665714363], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.782627069162612, -0.15647398118421446, 0.4810107935242998], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the green block and place it on the white mug first, then put the yellow block on top of the green block.",
+        "code": "```python\npri.grab('green_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4563340880824042, -0.004327269401546276, 0.23718924585976203], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.7691484272023125, -0.14627950491493938, 0.44097086078383585], \"yellow_goal\": [0.7719280060749901, -0.14879208665546106, 0.48096038182293005]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the yellow block on the white mug, then place the blue block on the yellow block.",
+        "code": "```python\npri.grab('yellow_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4568609433760348, -0.004339154348602992, 0.2372022753165956], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.7820438463528573, -0.15289903406702582, 0.48137995100612124], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7684468675177623, -0.14438101438685103, 0.4409708660200239]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the blue square on the black cup first, then put the red square on the blue square, and finally to put the green square on the red square.",
+        "code": "```python\npri.grab('blue_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44994510628672346, -0.012264272383175871, 0.2407936872802094], \"gripper_state\": \"open\", \"red_goal\": [0.46595806868002937, -0.0929532210005953, 0.4808861800839105], \"blue_goal\": [0.45722562005104783, -0.09650140167861317, 0.4409563062059545], \"green_goal\": [0.46534564501906645, -0.09102523409545808, 0.5208779030606996], \"yellow_goal\": [0.7040362888980227, -0.23970775285209878, 0.4409854272419662]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the red block and place it on the black mug first, then stack the green block on top of the red block, and finally to stack the yellow block on top of the green block.",
+        "code": "```python\npri.grab('red_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4486780288165423, -0.01276184788178718, 0.24101117325979943], \"gripper_state\": \"open\", \"red_goal\": [0.45196335003918725, -0.09685271720117353, 0.44095631276186115], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.45320507700703005, -0.09397263802977644, 0.4809166669555495], \"yellow_goal\": [0.45463550566167293, -0.0936327354501132, 0.52095639681573]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the green block and place it on the black mug first, then put the blue block on top of the green block, and finally to put the yellow block on top of the blue block.",
+        "code": "```python\npri.grab('green_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4492640284084967, -0.013457099263330259, 0.2411196587107723], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.45817019624412475, -0.09508966658717569, 0.48086517558952846], \"green_goal\": [0.44221111983413475, -0.09614573408802224, 0.4409563163543119], \"yellow_goal\": [0.4599346064494022, -0.09447000790918708, 0.5208363335503229]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the yellow block on the black mug, then place the blue block on the yellow block, and finally to place the red block on the blue block.",
+        "code": "```python\npri.grab('yellow_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.44923308611918517, -0.012642977115606694, 0.24124402866519817], \"gripper_state\": \"open\", \"red_goal\": [0.466933726046686, -0.09198865046631458, 0.5208372852230327], \"blue_goal\": [0.4550461336539154, -0.09304509130863775, 0.4808750700836314], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.44198128351474175, -0.09829732888254149, 0.44095630794694823]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Please put the blue square on the white cup first, then put the yellow square on the blue square, and finally to put the green square on the yellow square.",
+        "code": "```python\npri.grab('blue_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4565553204015095, -0.004394102890667655, 0.23769544145578209], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.7791048446256316, -0.15576926050662684, 0.4409563110666815], \"green_goal\": [0.7902442706153379, -0.1629986696697642, 0.521104951249349], \"yellow_goal\": [0.7811342946993424, -0.15854731784322612, 0.48091600074422397]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Pick up the red block and place it on the white mug first, then stack the green block on top of the red block, and finally to stack the yellow block on top of the green block.",
+        "code": "```python\npri.grab('red_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4565890411210329, -0.004459315122263288, 0.23763390097465314], \"gripper_state\": \"open\", \"red_goal\": [0.7771076162474115, -0.1531484101126919, 0.44095630618668075], \"blue_goal\": [0.3790418060840997, 0.1830880728874676, 0.4409854272419662], \"green_goal\": [0.7826411755797837, -0.15646274711764158, 0.4809123675340369], \"yellow_goal\": [0.7849962844848218, -0.15861450901602642, 0.5208979037548147]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Grab the green block and place it on the white mug first, then put the yellow block on top of the green block, and finally to put the blue block on top of the yellow block.",
+        "code": "```python\npri.grab('green_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45730974020667053, -0.004526899240347623, 0.2377296679070417], \"gripper_state\": \"open\", \"red_goal\": [0.5372700594236812, 0.22535715320495808, 0.4409854272419662], \"blue_goal\": [0.7854584193325174, -0.15709038394327635, 0.5213131548551354], \"green_goal\": [0.7691482626609596, -0.14628927153270532, 0.4409563012593312], \"yellow_goal\": [0.7719225298881565, -0.14880892048866698, 0.4809363011206946]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the yellow block on the white mug, then place the blue block on the yellow block, and finally to place the red block on the blue block.",
+        "code": "```python\npri.grab('yellow_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45773807181707776, -0.0045858001054675974, 0.23774618942550169], \"gripper_state\": \"open\", \"red_goal\": [0.7968298756759546, -0.16247536831020354, 0.5212215626023957], \"blue_goal\": [0.7824417070495511, -0.15310488338145953, 0.480864398531306], \"green_goal\": [0.6493292420985183, -0.17199067977878174, 0.4409854272419662], \"yellow_goal\": [0.7684614427992273, -0.1443976725602295, 0.44095632098551263]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "First to put the blue cube on the black mug, then stack the red, green and yellow cubes on top of the blue cube in order, and finally to move the gripper 10cm over the green block.",
+        "code": "```python\npri.grab('blue_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')```",
+        "goal_pos": "{\"gripper_pos\": [0.46437001356115915, -0.08988672580233047, 0.31027664246071124], \"gripper_state\": \"open\", \"red_goal\": [0.466034782347675, -0.09299179700235043, 0.48087757600481534], \"blue_goal\": [0.45724642897146567, -0.09651341649813816, 0.44094181154024253], \"green_goal\": [0.46544580893599863, -0.0911061687012149, 0.5208652608188532], \"yellow_goal\": [0.4656116178034197, -0.0864666843430499, 0.5610727049872227]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the red block on the black mug, then place the yellow block on the red block, then place the blue block on the yellow block, then to place the green block on the blue block, and finally to move the gripper 10cm over the blue block.",
+        "code": "```python\npri.grab('red_block')\nblack_pos, black_quat = pri.get_obj_pose('black_mug')\ntarget_pos = black_pos + np.array([0, 0, 0.15])\npri.move(target_pos, black_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')```",
+        "goal_pos": "{\"gripper_pos\": [0.46653176408679453, -0.08422712779457979, 0.31037304364386603], \"gripper_state\": \"open\", \"red_goal\": [0.4535899084019871, -0.09480234998263594, 0.440941782185444], \"blue_goal\": [0.4674597264117418, -0.08465053386502072, 0.52080709952594], \"green_goal\": [0.47048774276119537, -0.0810598426452472, 0.5607643777457973], \"yellow_goal\": [0.45402879348829345, -0.09281544021867072, 0.4809151313664442]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "First to put the yellow cube on the white mug, then stack the red, green and blue cubes on top of the yellow cube in order.",
+        "code": "```python\npri.grab('yellow_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.grab('red_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\ngreen_pos, green_quat = pri.get_obj_pose('green_block')\ntarget_pos = green_pos + np.array([0, 0, 0.1])\npri.move(target_pos, green_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.45683124679129583, -0.0043853884640540275, 0.23804870213483925], \"gripper_state\": \"open\", \"red_goal\": [0.7821914822123035, -0.15452687393097386, 0.4807833077412484], \"blue_goal\": [0.8071031870693554, -0.16971916335109416, 0.5610046735324346], \"green_goal\": [0.7921192541883234, -0.1593711219253185, 0.5205725219773757], \"yellow_goal\": [0.7687890872594466, -0.14476130709661325, 0.4409418273681911]}",
+        "task": "Multi_step_no_inference"
+    },
+    {
+        "instruction": "Place the red block on the white mug, then place the yellow block on the red block, then place the blue block on the yellow block, and finally to place the green block on the blue block.",
+        "code": "```python\npri.grab('red_block')\nwhite_pos, white_quat = pri.get_obj_pose('white_mug')\ntarget_pos = white_pos + np.array([0, 0, 0.15])\npri.move(target_pos, white_quat)\npri.gripper_ctrl('open')\npri.grab('yellow_block')\nred_pos, red_quat = pri.get_obj_pose('red_block')\ntarget_pos = red_pos + np.array([0, 0, 0.1])\npri.move(target_pos, red_quat)\npri.gripper_ctrl('open')\npri.grab('blue_block')\nyellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')\ntarget_pos = yellow_pos + np.array([0, 0, 0.1])\npri.move(target_pos, yellow_quat)\npri.gripper_ctrl('open')\npri.grab('green_block')\nblue_pos, blue_quat = pri.get_obj_pose('blue_block')\ntarget_pos = blue_pos + np.array([0, 0, 0.1])\npri.move(target_pos, blue_quat)\npri.gripper_ctrl('open')\npri.reset_robot()```",
+        "goal_pos": "{\"gripper_pos\": [0.4574699277030688, -0.004600896716447368, 0.2381604393573033], \"gripper_state\": \"open\", \"red_goal\": [0.777072818472296, -0.15326507191077088, 0.44094178869362316], \"blue_goal\": [0.791647484781448, -0.16546284706523698, 0.5208166261377857], \"green_goal\": [0.8028841482226026, -0.1687056985161293, 0.5610884940165209], \"yellow_goal\": [0.7791338180451995, -0.15649209412904047, 0.48090930056119513]}",
+        "task": "Multi_step_no_inference"
+    }
+]

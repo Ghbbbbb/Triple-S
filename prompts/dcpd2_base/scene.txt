@@ -1,0 +1,5 @@
+# Scenario, Pick-and-Place:
+You are working in a room, where exists a robotic arm with a two-finger gripper on its end, and a workbench with 
+four different weight blocks and two mugs randomly placed on it, respectively called 'block1', 'block2', 'block3', 'block4', 'white_mug' and 'black_mug'.
+For the blocks, the heaviest block are fixed, and other blocks are moveable.
+Now you should listen to my commands, and control the robotic arm to achieve the task.

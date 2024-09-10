@@ -2,7 +2,7 @@ import numpy as np
 import time
 
 from robopal.envs import RobotEnv
-from robopal.robots.diana_med import DianaGraspMultiObjs,DianaGraspMultiObjs_Partobservable,DianaGrasp_kh,DianaGrasp_am
+from robopal.robots.diana_med import DianaGraspMultiObjs,DianaGraspMultiObjs_Partobservable
 
 def primitive(func, checker=None):
     """ primitive flag, no practical effect. """
@@ -57,11 +57,7 @@ class GraspingEnv(RobotEnv):
         def checkArriveState(state):
             current_pos, current_quat = self.get_current_pose()
             error = np.sum(np.abs(state[:3] - current_pos)) + np.sum(np.abs(state[3:] - current_quat))
-            error2 = 2*np.sum(np.abs(state[:3] - current_pos)) + np.sum(np.abs(state[3:] - current_quat)/2.5)        #跑仿真效果时用
-            # print("state:",state)
-            # print("current:",current_pos,current_quat)
-            # print("位置",np.sum(np.abs(state[:3] - current_pos)),"姿态",np.sum(np.abs(state[3:] - current_quat)))
-            # print("error:",error2)
+            error2 = 2*np.sum(np.abs(state[:3] - current_pos)) + np.sum(np.abs(state[3:] - current_quat)/2.5)        #run Simulation
             end_time = time.time()
             elapsed_time  = end_time - start_time
             # print("time:",elapsed_time)

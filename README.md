@@ -1,7 +1,7 @@
 # Triple-S
-This is code repository for the paper "Triple-S: A Collaborative Multi-LLM Framework for Solving Long- Horizon Abstract Tasks in Robotics".
+This is code repository for the paper **"Triple-S: A Collaborative Multi-LLM Framework for Solving Long-Horizon Abstract Tasks in Robotics"**.
 
-In recent years, extensive research has focused on enabling Large Language Models (LLMs) to write strategy code that drives robots. However, for long-sequence abstract tasks, this approach often results in API parameter and sequencing errors, leading to failures in the robot’s final movements. To address this issue, we propose a multi-LLM collaborative framework, named Triple-S, which leverages contextual learning to assign specific roles to different LLMs. Through a closed loop process of Simplify-Solution-Summary, the framework significantly improves the success rate of executing long-sequence abstract tasks. We validated Triple-S on the Desktop Cube Placement Dataset [(DCPD)](dataset/README.md), where it successfully completed 89% of tasks in both fully visible and partially visible abstract scenarios, outperforming state-of-the-art methods by 16%. Additionally, Triple-S demonstrated remarkable robustness. 
+In recent years, extensive research has focused on enabling Large Language Models (LLMs) to write strategy code that drives robots. However, for long-horizon abstract tasks, this approach often results in API parameter and sequencing errors, leading to failures in the robot’s final movements. To address this issue, we propose a multi-LLM collaborative framework, named Triple-S, which leverages In-Context Learning to assign specific roles to different LLMs. Through a closed loop process of Simplify-Solution-Summary, the framework significantly improves the success rate of executing long-horizon abstract tasks. We validated Triple-S on the Desktop Cube Placement Dataset [(DCPD)](dataset/README.md), where it successfully completed 89% of tasks in both observable and partially observable scenarios, outperforming state-of-the-art methods by 16%. Additionally, Triple-S demonstrated remarkable robustness. 
 
 ![The framework of IRAIS](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/Triple-S.png)
 
@@ -9,7 +9,7 @@ In recent years, extensive research has focused on enabling Large Language Model
 ## Install
 Install requirements for repository 
 ```
-    # Install robopal emulation environment
+    # Install Robopal simulation environment
     cd robopal
     pip install -r requirements.txt
     # Install the main program dependencies
@@ -52,7 +52,3 @@ gpt3.5-turbo-0613
 - Output: outputs/gpt3.5-dcpd2-ours.txt
 - Accuracy: 94.85%
 - Mean error: 0.042
-
-
-## Note
-At present, the code and datasets are still being updated. We plan to make the code publicly available in future work once the project reaches completion. For now, we are sharing this preliminary version for review purposes only. We kindly ask for your understanding and respect for the intellectual property involved.

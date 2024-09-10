@@ -9,10 +9,10 @@ from langchain_community.llms.huggingface_pipeline import HuggingFacePipeline
 from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
 from transformers import pipeline
 
-from prompts.prompt_template import get_qa_template_baichuan,get_qa_template_llama
-from prompts.tool import simplify,simplify_llama3
+from prompts.prompt_template import get_qa_template_llama
 import commons.embedding_utils as eu
 from commons.utils import *
+from prompts.tool import *
 
 logging.basicConfig(level=logging.INFO)
 
@@ -38,7 +38,7 @@ class LLaMAAssistant:
         generation_config = GenerationConfig.from_pretrained(model_id)
         pipe = pipeline(
             "text-generation",
-            temperature = 0.2,
+            temperature = 0.01,
             do_sample = True,
             model=model,
             torch_dtype=torch.bfloat16,
@@ -67,9 +67,9 @@ class LLaMAAssistant:
         os.system("clear")
         streaming_print_banner()
 
-    def ask(self, question, id):
+    def ask(self, question):
         # Dynamically generate the prompt template with the current question
-        qa_template = get_qa_template_llama(self.prompt_doc, question, id)
+        qa_template = get_qa_template_llama(self.prompt_doc, question)
         
         chain = RetrievalQA.from_chain_type(
             llm=self.llm,
@@ -95,19 +95,6 @@ class LLaMAAssistant:
             return result, error_message
         else:
             return response, None
-
-def write_to_file(file_path, question, result, response):
-    """
-    将问题、结果和响应写入指定的文本文件。
-    """
-    state = "error" if response.startswith("ERROR:") else "succeed"
-    record = {
-        "state": state,
-        "User": question,
-        "Robot": result
-    }
-    with open(file_path, 'a', encoding='utf-8') as file:
-        file.write(json.dumps(record) + '\n')
 
 def extract_python_code(content):
     """Extract the first python code block from the input content and remove comments.
@@ -141,13 +128,13 @@ def get_summary_line(file_path, line_number):
         return lines[line_number - 1].strip()  # line_number is 1-based
         
 def extract_and_format(input_str):
-    # 使用正则表达式提取'{}'中的内容
+    # Use regular expressions to extract the content within '{}'
     extracted_phrases = re.findall(r'\{([^{}]+)\}', input_str)
 
-    # 将提取的内容用"then"连接
+    # Join the extracted content with "then"
     joined_phrases = ' then '.join(extracted_phrases)
 
-    # 去掉标点符号
+    # Remove punctuation
     formatted_result = re.sub(r'[^\w\s]', '', joined_phrases)
 
     return formatted_result
@@ -159,8 +146,7 @@ def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "dcpd1_base",TASK="dcpd1
         verbose=False,prompt_doc=PROMPT_DOC
     )
     if not IS_DEBUG:
-        HOST = '172.22.54.46'
-        # HOST = '172.19.32.6'
+        HOST = 'localhost'
         PORT = 5001
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.connect((HOST, PORT))
@@ -168,20 +154,19 @@ def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "dcpd1_base",TASK="dcpd1
     id = 0
     while not IS_DOC:
         question = input(colors.YELLOW + "User> " + colors.ENDC)
-        id += 1
         if question == "!quit" or question == "!exit":
             break
         if question == "!clear":
             os.system("cls")
             continue
         # _, simplify_question = simplify(question)
-        result,context = gpt.ask(question,id)  # Ask a question
+        result,context = gpt.ask(question)  # Ask a question
         code = extract_python_code(result)
         print(colors.GREEN + "Assistant> " + colors.ENDC + f"{result}")
         if not IS_DEBUG:
             s.sendall(code.encode()[:1300])
 
-            # 等待确认消息或错误消息
+            # Wait for a confirmation message or an error message
             response = s.recv(1024).decode()
             feedback, error_message = gpt.handle_response(response, question, context)
             feedback_code = extract_python_code(feedback)
@@ -191,7 +176,7 @@ def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "dcpd1_base",TASK="dcpd1
             if error_message:
                 s.sendall(feedback_code.encode()[:1300])
 
-                # 等待确认消息或错误消息
+                # Wait for a confirmation message or an error message
                 response = s.recv(1024).decode()
                 if response.startswith("ERROR:"):
                     print(colors.RED + "Final Error> " + colors.ENDC + f"{response[len('ERROR:'):]}")
@@ -201,36 +186,34 @@ def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "dcpd1_base",TASK="dcpd1
     # 2.文件输入
     if IS_DOC:
         with open(f"dataset/{TASK}.json", "r") as file:
-        # with open(f"dataset/DCPD1/task-4.json", "r") as file:
             data = json.load(file)
             num_entries = len(data)
         start = time.time()
         for entry in data:
             id += 1
-            question = entry.get("instruction")  # 获取问题
+            question = entry.get("instruction")  # acquire question
             simplify_question = extract_and_format(get_summary_line(f"prompts/simplify_{TASK}.txt",id))
-            # simplify_question = simplify_llama3(question)
-            result,context = gpt.ask(simplify_question,id)  # 调用函数获取答案
+            # result,context = gpt.ask(question)           # answer the question without simplify
+            result,context = gpt.ask(simplify_question)  # answer the question with simplify
             code = extract_python_code(result)
             print('\033[31m'"question:",question)
-            print('\033[31m'"simplify_question:",simplify_question)
+            # print('\033[31m'"simplify_question:",simplify_question)
             print('\033[32m'"result:",result,'\n')
 
             if not IS_DEBUG:
                 s.sendall(code.encode()[:1300])
 
-                # 等待确认消息或错误消息
+                 # Wait for a confirmation message or an error message
                 response = s.recv(1024).decode()
                 feedback, error_message = gpt.handle_response(response, question, context)
                 feedback_code = extract_python_code(feedback)
                 print(colors.RED + "Error> " + colors.ENDC + f"{error_message}")
                 print(colors.GREEN + "Feedback> " + colors.ENDC + f"{feedback}")
-                write_to_file(f"output/qa/llama3_{TASK}", question, result, response)
 
                 if error_message:
                     s.sendall(feedback_code.encode()[:1300])
 
-                    # 等待确认消息或错误消息
+                    # Wait for a confirmation message or an error message
                     response = s.recv(1024).decode()
                     if response.startswith("ERROR:"):
                         print(colors.RED + "Final Error> " + colors.ENDC + f"{response[len('ERROR:'):]}")

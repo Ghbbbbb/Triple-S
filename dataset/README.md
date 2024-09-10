@@ -1,11 +1,10 @@
 <h1 align="center">
 Desktop Cube Placement Dataset
 </h1>
+This is a dataset for cube place on desktop, known as the Desktop Cube Placement Dataset(DCPD), which is based on the Robopal simulation environment (`robopal`), and includes both observable and partially abservable scenarios, as shown in figure below. In the observable scenario, there are 224 instructions, more than half of which involve abstract tasks. This scenario includes four differently colored cubes and two differently colored cups. In this setting, the LLM needs to further simplify the instructions to map the objects mentioned in the instructions to those present in the environment. In the partially observable scenario, there are 97 tasks with abstract environmental states, involving three movable cubes of varying masses, one fixed cube, and two differently colored cups. In this setting, LLMs needs to introduce additional sensors (additional advanced APIs) to acquire information, thereby increasing the extra code prediction workload.
 
-This is a dataset for machine-assisted hospital item transport, known as the Hospital Item Transport Dataset (HITD). It takes natural language instructions as input and generates low-level code to facilitate item transport tasks in a hospital setting. We provide both Chinese(`zh`) and English(`en`) versions of the HITD dataset for research purposes. It is important to note that all results discussed in this document are derived from the Chinese(`zh`) dataset. Additionally, within this project, we offer 1-shot English prompt (`prompt/en`) for researchers to validate results.
 
-Each natural language instruction consists of three components: [*originating department*, *intermediate transport department*, *final destination department*]. The *originating department* and *intermediate transport department* are selected from a list of 10 common hospital departments, and the *final destination department* is chosen from "Logistics" or "General Services".
-![Introduction of HITD](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/DCPD.png)
+![Introduction of DCPD](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/DCPD.png)
 ## 1.Explanation of high-level API:
 
 **pri.gripper_ctrl(command)**: Ctrl the gripper, param 'command' is a string type, consist of 'open' and 'close'.
@@ -20,27 +19,28 @@ Each natural language instruction consists of three components: [*originating de
 
 **pri.grab(object_name: str)**: Grab specified object according to the input name.
 
+**pri.get_obj_mass(self, name: str)**: Get the mass of the object.
+
 **pri.say(content:str)**: Say something if you don't understand the command.
 
 
-### Explanation of each JSON file:
+### 2.Explanation of each JSON file:
 
-- **dcpd1.json**: Contains the complete HITD dataset with 1000 samples. Each sample is structured as follows:
+- **dcpd1.json**: Includes a total of 224 data points in the observable environment. Each sample is structured as follows:
 ```
 {
     "instruction": str,     # User-inputted instruction
     "code": str,            # Corresponding policy code
     "goal_pos": str,        # The ground truth state of object and gripper
-    "task": int             # Type of task, categorized as Short_step_no_inference, Short_step_with_inference, Long_step_no_inference, Long_step_with_inference
+    "task": str             # Type of task, categorized as "Short_step_no_inference", "Short_step_with_inference", "Long_step_no_inference", "Long_step_with_inference"
 }
 ```
 
-- **dcpd1-1.json**: Subset of HITD dataset containing samples with "task" as "Multi_department" (325 samples). Average code length is 399 characters, with 1-4 *originating departments* and 1-5 *intermediate transport departments*, without priority.
-
-- **dcpd1-2.json**: Subset of HITD dataset containing samples with "task" as "Multi_department_priority" (331 samples). Average code length is 371 characters, with 1-4 *originating departments* and 1-5 *intermediate transport departments*, with priority.
-
-- **dcpd1-3.json**: Subset of HITD dataset containing samples with "task" as "Single_department" (344 samples). Average code length is 202 characters, with 1 *originating department* and 1-9 *intermediate transport departments*, without priority.
-
-- **dcpd1-4.json**: 200 randomly selected samples from HITD dataset, serving as test samples without noise interference.
-
-- **dcpd2.json**: Perturbed version of HITD_no_noise.json with noise, which includes changes in expression while retaining the overall meaning (e.g., synonym substitution, rephrasing of sentence structure).
+- **dcpd2.json**: Includes a total of 78 data points in the partially abservable environment. Each sample is structured as follows:
+```
+{
+    "instruction": str,     # User-inputted instruction
+    "code": str,            # Corresponding policy code
+    "goal_pos": str,        # The ground truth state of object and gripper
+}
+```

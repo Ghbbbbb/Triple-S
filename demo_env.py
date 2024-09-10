@@ -65,10 +65,6 @@ class GraspingEnv(RobotEnv):
             end_time = time.time()
             elapsed_time  = end_time - start_time
             # print("time:",elapsed_time)
-            if elapsed_time > 30:
-                with open("error1.txt", "a") as file:
-                    file.write("Feasibility error\n")
-                    print("Feasibility")
             if error2 <= 0.05 or elapsed_time  > 30:
                 return True
             return False
@@ -108,9 +104,9 @@ class GraspingEnv(RobotEnv):
     @primitive       
     def get_gripper_status(self):
         """
-        获取夹爪状态。
+        get gripper state
         
-        :return: 夹爪状态，例如 "open" 或 "close"。
+        :return: gripper state: "open" or "close"。
         """
 
         if self.mj_data.actuator("0_gripper_l_finger_joint").ctrl == 20:
@@ -138,52 +134,13 @@ class GraspingEnv(RobotEnv):
         """
         self.grab(name)
         self.mj_data.actuator("0_gripper_l_finger_joint").ctrl = 0
-        # 获取物体的ID
+        # Get the object's ID
         body_id = self.mj_model.body(name).id
-        # 获取物体的质量
+        # Get the object's mass
         body_mass = self.mj_model.body_mass[body_id]
         return body_mass
 
 
-    @primitive
-    def anmo(self, vigour, duration):
-        # 获取当前位置和姿态
-        pos, quat = self.get_current_pose()
-        
-        # 关闭夹爪，进入按摩状态
-        self.mj_data.actuator("0_gripper_l_finger_joint").ctrl = 0
-        
-        # 定义按摩的频率（次数/秒）
-        frequency = 2
-        
-        # 计算每次按摩的时长
-        interval = 1 / frequency
-        
-        # 定义力度与按压深度的映射
-        depth_mapping = {
-            1: 0.05,  # 5 cm
-            2: 0.06,  # 6 cm
-            3: 0.07,  # 7 cm
-            4: 0.08,  # 8 cm
-            5: 0.10   # 10 cm
-        }
-        
-        # 获取对应力度的按压深度
-        amplitude = depth_mapping.get(vigour, 0.05)  # 默认力度为1对应的深度
-        
-        # 记录开始时间
-        start_time = time.time()
-        
-        while time.time() - start_time < duration:
-            # 按摩动作：向下移动
-            pos[2] -= amplitude
-            self.move(pos, quat)
-            time.sleep(interval / 2)
-            
-            # 按摩动作：向上移动
-            pos[2] += amplitude
-            self.move(pos, quat)
-            time.sleep(interval / 2)
 
 ######################env1_skill_update#####################
     @primitive

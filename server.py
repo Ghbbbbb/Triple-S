@@ -133,7 +133,7 @@ def write_goal_positions_to_json2(env, filename):
         print(f"An error occurred while writing goal positions to JSON file: {e}")
 
 
-def main(WRITE="gpt3.5_depd1-1", IS_DOC=False, IS_ENV2=False):
+def main(WRITE="gpt3.5_dcpd1", IS_DOC=False, IS_ENV2=False):
     logging.info("Initializing TCP...")
     HOST = ''
     ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -155,15 +155,13 @@ def main(WRITE="gpt3.5_depd1-1", IS_DOC=False, IS_ENV2=False):
             logging.info(f"Connected by {addr}")
 
             while True:
-                first_attempt = True  # 每个任务重置 first_attempt 标志
+                first_attempt = True  # Reset the 'first_attempt' flag for each task
 
                 while True:
                     try:
                         data = conn.recv(10000)
                         if not data:
                             break
-                        with open("error1.txt", "a") as file:
-                                file.write("\n")
                         # print("DATA!",data.decode())
                         success, error_message = execute_python_code(env, data.decode(),IS_ENV2)
                         if WRITE and success:
@@ -183,11 +181,11 @@ def main(WRITE="gpt3.5_depd1-1", IS_DOC=False, IS_ENV2=False):
                             conn.sendall("ACK".encode())
                         else:
                             if first_attempt:
-                                env.reset()          #考虑机械臂运动到中途然后发生代码报错的情况，需要重置环境
+                                env.reset()          # Consider the case where the robotic arm stops midway due to a code error, requiring an environment reset
                                 conn.sendall(f"ERROR:{error_message}".encode())
                                 first_attempt = False
                             else:
-                                env.reset()          #考虑机械臂运动到中途然后发生代码报错的情况，需要重置环境
+                                env.reset()          # Consider the case where the robotic arm stops midway due to a code error, requiring an environment reset
                                 if WRITE:
                                     if IS_ENV2:
                                         write_goal_positions_to_json2(env,f'E:/Git/Git/gitclone/MRoP/output/{WRITE}.txt')
@@ -195,9 +193,6 @@ def main(WRITE="gpt3.5_depd1-1", IS_DOC=False, IS_ENV2=False):
                                         write_goal_positions_to_json(env,f'E:/Git/Git/gitclone/MRoP/output/{WRITE}.txt')
                                         print(first_attempt,"ll")
                                 conn.sendall("ERROR:Final Error".encode())
-                                with open("error1.txt", "a") as file:
-                                    file.write("Syntax error\n")
-                                    print("Syntax")
                                 first_attempt = True
 
                     except socket.error as e:

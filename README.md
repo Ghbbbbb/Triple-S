@@ -22,7 +22,7 @@ Install requirements for repository
 
 - gpt
 ```
-export OPENAI_API_KEY = [YOUR_KEY]
+export OPENAI_API_KEY=[YOUR_KEY]
 python server.py [--write *** --doc --env2]
 python client_retrieval_gpt.py [--debug --doc --prompt *** --task ***]
 ```

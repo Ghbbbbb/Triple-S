@@ -231,8 +231,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run the GPTAssistant")
     parser.add_argument("--debug", action="store_true", help="Enable debug mode")
     parser.add_argument("--doc", action="store_true", help="Enable documentation mode")
-    parser.add_argument("--prompt", type=str, default="dcpd1_base", help="Specify the prompt directory")
-    parser.add_argument("--task", type=str, default="dcpd1", help="Specify the dataset directory")
+    parser.add_argument("--prompt", type=str, default="LDAP1_BASE", help="Specify the prompt directory")
+    parser.add_argument("--task", type=str, default="LDAP1", help="Specify the dataset directory")
 
     args = parser.parse_args()
     main(IS_DEBUG=args.debug, IS_DOC=args.doc, PROMPT_DOC=args.prompt, TASK=args.task)

@@ -4,7 +4,7 @@ Long-horizon Desktop Abstract Placement
 This is a dataset for cube place on desktop, known as the Long-horizon Desktop Abstract Placement(LDAP) dataset, which is based on the Robopal simulation environment (`robopal`), and includes both observable and partially abservable scenarios, as shown in figure below. In the observable scenario, there are 224 instructions, more than half of which involve abstract tasks. This scenario includes four differently colored cubes and two differently colored cups. In this setting, the LLM needs to further simplify the instructions to map the objects mentioned in the instructions to those present in the environment. In the partially observable scenario, there are 97 tasks with abstract environmental states, involving three movable cubes of varying masses, one fixed cube, and two differently colored cups. In this setting, LLMs needs to introduce additional sensors (additional advanced APIs) to acquire information, thereby increasing the extra code prediction workload.
 
 
-![Introduction of DCPD](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/DCPD.png)
+![Introduction of LDAP](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/LDAP.png)
 ## 1.Explanation of high-level API:
 
 **pri.gripper_ctrl(command)**: Ctrl the gripper, param 'command' is a string type, consist of 'open' and 'close'.
@@ -26,7 +26,7 @@ This is a dataset for cube place on desktop, known as the Long-horizon Desktop A
 
 ### 2.Explanation of each JSON file:
 
-- **dcpd1.json**: Includes a total of 224 data points in the observable environment. Each sample is structured as follows:
+- **LDAP1.json**: Includes a total of 224 data points in the observable environment. Each sample is structured as follows:
 ```
 {
     "instruction": str,     # User-inputted instruction
@@ -36,7 +36,7 @@ This is a dataset for cube place on desktop, known as the Long-horizon Desktop A
 }
 ```
 
-- **dcpd2.json**: Includes a total of 78 data points in the partially abservable environment. Each sample is structured as follows:
+- **LDAP2.json**: Includes a total of 78 data points in the partially abservable environment. Each sample is structured as follows:
 ```
 {
     "instruction": str,     # User-inputted instruction

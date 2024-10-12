@@ -248,13 +248,7 @@ class GraspingEnv(RobotEnv):
         # Return the sorted block names
         return lightest_movable_block, medium_weight_movable_block, heaviest_movable_block, fixed_block
 
-    # @primitive
-    # def stack(self,obj1,obj2):
-    #     self.grab(obj1)
-    #     pos, quat = self.get_obj_pose(obj2)
-    #     target_pos = pos + np.array([0,0,0.1])
-    #     self.move(target_pos,quat)
-    #     self.gripper_ctrl('open')
+
 
 def make_env():
     env = GraspingEnv(

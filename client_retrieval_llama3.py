@@ -20,7 +20,7 @@ logging.basicConfig(level=logging.INFO)
 class LLaMAAssistant:
     """ Load ChatGPT config and your custom pre-prompts. """
 
-    def __init__(self, model_id: str = None,verbose=False, prompt_doc="dcpd1_base") -> None:
+    def __init__(self, model_id: str = None,verbose=False, prompt_doc="LDAP1_BASE") -> None:
         
         logging.info("Initialize langchain...")
         
@@ -38,7 +38,7 @@ class LLaMAAssistant:
         generation_config = GenerationConfig.from_pretrained(model_id)
         pipe = pipeline(
             "text-generation",
-            temperature = 0.01,
+            temperature = 0.2,
             do_sample = True,
             model=model,
             torch_dtype=torch.bfloat16,
@@ -139,10 +139,10 @@ def extract_and_format(input_str):
 
     return formatted_result
 
-def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "dcpd1_base",TASK="dcpd1-1"):
+def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "LDAP1_BASE",TASK="LDAP1"):
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
     gpt = LLaMAAssistant(
-        model_id='Meta-Llama-3-8B-Instruct',
+        model_id='meta-llama/Meta-Llama-3-8B-Instruct',
         verbose=False,prompt_doc=PROMPT_DOC
     )
     if not IS_DEBUG:
@@ -152,12 +152,13 @@ def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "dcpd1_base",TASK="dcpd1
         s.connect((HOST, PORT))
         print("Connected to server.")
     id = 0
+    # 1. Debug mode
     while not IS_DOC:
         question = input(colors.YELLOW + "User> " + colors.ENDC)
         if question == "!quit" or question == "!exit":
             break
         if question == "!clear":
-            os.system("cls")
+            os.system("clear")
             continue
         # _, simplify_question = simplify(question)
         result,context = gpt.ask(question)  # Ask a question
@@ -183,21 +184,25 @@ def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "dcpd1_base",TASK="dcpd1
                 else:
                     print(colors.GREEN + "Final Result> " + colors.ENDC + f"{response}")
 
-    # 2.文件输入
+    # 2. Documentation mode
     if IS_DOC:
+        Simplify = True  #Set it to `False` without going through Simplify LLM
         with open(f"dataset/{TASK}.json", "r") as file:
             data = json.load(file)
             num_entries = len(data)
         start = time.time()
         for entry in data:
-            id += 1
             question = entry.get("instruction")  # acquire question
-            simplify_question = extract_and_format(get_summary_line(f"prompts/simplify_{TASK}.txt",id))
-            # result,context = gpt.ask(question)           # answer the question without simplify
-            result,context = gpt.ask(simplify_question)  # answer the question with simplify
-            code = extract_python_code(result)
+            id += 1
+            if Simplify:
+                simplify_question = extract_and_format(get_summary_line(f"prompts/simplify_{TASK}.txt",id)) #In order to save token costs, we directly read simplified tasks that have been predicted in advance
+                result,context = gpt.ask(simplify_question)  # answer the question with simplify
+                code = extract_python_code(result)
+            else:
+                result,context = gpt.ask(question)           # answer the question without simplify
+                code = extract_python_code(result)
             print('\033[31m'"question:",question)
-            # print('\033[31m'"simplify_question:",simplify_question)
+            if Simplify: print('\033[31m'"simplify_question:",simplify_question)
             print('\033[32m'"result:",result,'\n')
 
             if not IS_DEBUG:

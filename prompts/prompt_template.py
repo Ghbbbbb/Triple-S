@@ -44,7 +44,7 @@ class PromptLoader:
 
 
 
-def get_qa_template_baichuan(prompt_doc: str,question:str):
+def get_qa_template_gpt(prompt_doc: str,question:str):
     prompt_loader = PromptLoader(prompt_doc)
 
     _ROBOT_PROMPT_TEMPLATE = f"""

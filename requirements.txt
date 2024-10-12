@@ -11,7 +11,7 @@ opencv_python==4.9.0.80
 pinecone==4.0.0
 ruckig==0.12.2
 setuptools==69.5.1
-torch==2.0.0+cu118
+# torch==2.1.0+cu118
 transformers==4.40.1
 accelerate==0.32.1
 sentence-transformers==3.0.1

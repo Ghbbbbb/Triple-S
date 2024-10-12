@@ -2,7 +2,7 @@ import numpy as np
 import json
 import argparse
 
-# 设置命令行参数
+# Set command line arguments
 parser = argparse.ArgumentParser()
 parser.add_argument("--file", required=True, type=str, help="Path to the input file")
 parser.add_argument("--env", required=True, choices=['env1', 'env2'], help="Specify the environment: env1 or env2")
@@ -87,8 +87,8 @@ def compare_positions(txt_data, json_data, env, threshold=0.05):
     mean_error = sum_error / total_count
     return accuracy, incorrect_lines, detailed_errors, mean_error
 
-# 根据环境选择相应的 JSON 文件路径
-json_file_path = '../dataset/dcpd1.json' if args.env == 'env1' else '../dataset/dcpd2.json'
+# Choose the appropriate JSON file path based on the environment
+json_file_path = '../dataset/LDAP1.json' if args.env == 'env1' else '../dataset/LDAP2.json'
 
 txt_data = load_txt_data(args.file)
 json_data = load_json_data(json_file_path)

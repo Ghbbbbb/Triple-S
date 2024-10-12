@@ -133,7 +133,7 @@ def write_goal_positions_to_json2(env, filename):
         print(f"An error occurred while writing goal positions to JSON file: {e}")
 
 
-def main(WRITE="gpt3.5_dcpd1", IS_DOC=False, IS_ENV2=False):
+def main(WRITE="GPT3.5_LDAP1_TEST", IS_DOC=False, IS_ENV2=False):
     logging.info("Initializing TCP...")
     HOST = ''
     ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -162,14 +162,12 @@ def main(WRITE="gpt3.5_dcpd1", IS_DOC=False, IS_ENV2=False):
                         data = conn.recv(10000)
                         if not data:
                             break
-                        # print("DATA!",data.decode())
                         success, error_message = execute_python_code(env, data.decode(),IS_ENV2)
                         if WRITE and success:
                             if IS_ENV2:
-                                write_goal_positions_to_json2(env,f'E:/Git/Git/gitclone/MRoP/output/{WRITE}.txt')
+                                write_goal_positions_to_json2(env,f'output/{WRITE}.txt')
                             else:
-                                print(first_attempt,"ss")
-                                write_goal_positions_to_json(env,f'E:/Git/Git/gitclone/MRoP/output/{WRITE}.txt')
+                                write_goal_positions_to_json(env,f'output/{WRITE}.txt')
 
                         if success:
                             first_attempt = True
@@ -188,10 +186,9 @@ def main(WRITE="gpt3.5_dcpd1", IS_DOC=False, IS_ENV2=False):
                                 env.reset()          # Consider the case where the robotic arm stops midway due to a code error, requiring an environment reset
                                 if WRITE:
                                     if IS_ENV2:
-                                        write_goal_positions_to_json2(env,f'E:/Git/Git/gitclone/MRoP/output/{WRITE}.txt')
+                                        write_goal_positions_to_json2(env,f'output/{WRITE}.txt')
                                     else:
-                                        write_goal_positions_to_json(env,f'E:/Git/Git/gitclone/MRoP/output/{WRITE}.txt')
-                                        print(first_attempt,"ll")
+                                        write_goal_positions_to_json(env,f'output/{WRITE}.txt')
                                 conn.sendall("ERROR:Final Error".encode())
                                 first_attempt = True
 
@@ -210,8 +207,8 @@ def main(WRITE="gpt3.5_dcpd1", IS_DOC=False, IS_ENV2=False):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Server for interacting with robot via various input methods.")
-    parser.add_argument("--write", type=str, default="gpt3.5_depd1-1", help="Specify the write directory")
-    parser.add_argument("--doc", action="store_true", help="Run in document input mode")
-    parser.add_argument("--env2", action="store_true", help="Run in environment2")
+    parser.add_argument("--write", type=str, default="GPT3.5_LDAP1_TEST", help="Specify the write directory")
+    parser.add_argument("--doc", action="store_true", help="Run in document mode else in debug mode")
+    parser.add_argument("--env2", action="store_true", help="Run in environment2 else in environment1")
     args = parser.parse_args()
     main(WRITE=args.write, IS_DOC=args.doc, IS_ENV2=args.env2)

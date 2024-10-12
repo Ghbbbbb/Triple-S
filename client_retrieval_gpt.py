@@ -7,7 +7,7 @@ from langchain.chains import RetrievalQA
 from langchain_openai import ChatOpenAI
 from prompts.tool import *
 
-from prompts.prompt_template import get_qa_template_baichuan
+from prompts.prompt_template import get_qa_template_gpt
 import commons.embedding_utils as eu
 from commons.utils import *
 
@@ -17,13 +17,12 @@ logging.basicConfig(level=logging.INFO)
 class GPTAssistant:
     """ Load ChatGPT config and your custom pre-prompts. """
 
-    def __init__(self, verbose=False, prompt_doc="dcpd1_base") -> None:
+    def __init__(self, verbose=False, prompt_doc="LDAP1_BASE") -> None:
         
 
         logging.info("Initialize LLM...")
         self.llm = ChatOpenAI(
-            # openai_api_base="https://api.gpts.vin/v1",
-            model="gpt-3.5-turbo-0613",
+            model="gpt-3.5-turbo-16k-0613",
             temperature=0,
             max_tokens=2048,
         )
@@ -39,12 +38,12 @@ class GPTAssistant:
         self.verbose = verbose
         self.retriever = self.vector_store.as_retriever(search_kwargs={'k': 4})
 
-        os.system("cls")
+        os.system("clear")
         streaming_print_banner()
 
     def ask(self, question):
         # Dynamically generate the prompt template with the current question
-        qa_template = get_qa_template_baichuan(self.prompt_doc, question)
+        qa_template = get_qa_template_gpt(self.prompt_doc, question)
         
         chain = RetrievalQA.from_chain_type(
             llm=self.llm,
@@ -120,7 +119,7 @@ def extract_and_format(input_str):
 
     return formatted_result
 
-def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "dcpd1_base", TASK = "dcpd1"):
+def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "LDAP1_BASE", TASK = "LDAP1"):
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
     gpt = GPTAssistant(
         verbose=False,prompt_doc=PROMPT_DOC
@@ -132,15 +131,14 @@ def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "dcpd1_base", TASK = "dc
         s.connect((HOST, PORT))
         print("Connected to server.")
     id = 0
-    # Debug mode
+    # 1. Debug mode
     while not IS_DOC:
         question = input(colors.YELLOW + "User> " + colors.ENDC)
         if question == "!quit" or question == "!exit":
             break
         if question == "!clear":
-            os.system("cls")
+            os.system("clear")
             continue
-        # _, simplify_question = simplify(question)
         result,context = gpt.ask(question)  # Ask a question
         code = extract_python_code(result)
         print(colors.GREEN + "Assistant> " + colors.ENDC + f"{result}")
@@ -164,22 +162,25 @@ def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "dcpd1_base", TASK = "dc
                 else:
                     print(colors.GREEN + "Final Result> " + colors.ENDC + f"{response}")
 
-    # 2.Documentation mode
+    # 2. Documentation mode
     if IS_DOC:
+        Simplify = True  #Set it to `False` without going through Simplify LLM
         with open(f"dataset/{TASK}.json", "r") as file:
             data = json.load(file)
             num_entries = len(data)
         start = time.time()
         for entry in data:
-            id += 1
             question = entry.get("instruction")  # acquire question
-            simplify_question = extract_and_format(get_summary_line(f"prompts/simplify_{TASK}.txt",id))
-            _, simplify_question = simplify(question)
-            # result,context = gpt.ask(question,id)  # answer the question without simplify
-            result,context = gpt.ask(simplify_question)  # answer the question with simplify
-            code = extract_python_code(result)
+            id += 1
+            if Simplify:
+                simplify_question = extract_and_format(get_summary_line(f"prompts/simplify_{TASK}.txt",id)) #In order to save token costs, we directly read simplified tasks that have been predicted in advance
+                result,context = gpt.ask(simplify_question)  # answer the question with simplify
+                code = extract_python_code(result)
+            else:
+                result,context = gpt.ask(question)           # answer the question without simplify
+                code = extract_python_code(result)
             print('\033[31m'"question:",question)
-            # print('\033[31m'"simplify_question:",simplify_question)
+            if Simplify: print('\033[31m'"simplify_question:",simplify_question)
             print('\033[32m'"result:",result,'\n')
 
             if not IS_DEBUG:

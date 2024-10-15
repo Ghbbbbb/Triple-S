@@ -1,7 +1,7 @@
 # Triple-S
-This is code repository for the paper **"Triple-S: A Collaborative Multi-LLM Framework for Solving Long-Horizon Abstract Tasks in Robotics"**.
+Welcome to Triple-S! 🚀This is code repository for the paper **"Triple-S: A Collaborative Multi-LLM Framework for Solving Long-Horizon Abstract Tasks in Robotics"**.
 
-In recent years, extensive research has focused on enabling Large Language Models (LLMs) to write strategy code that drives robots. However, for long-horizon abstract tasks, this approach often results in API parameter and sequencing errors, leading to failures in the robot’s final movements. To address this issue, we propose a multi-LLM collaborative framework, named Triple-S, which leverages In-Context Learning to assign specific roles to different LLMs. Through a closed loop process of Simplify-Solution-Summary, the framework significantly improves the success rate of executing long-horizon abstract tasks. We validated Triple-S on the Long-sequence Desktop Abstract Placement[(LDAP)](dataset/README.md) dataset, where it successfully completed 89% of tasks in both observable and partially observable scenarios, outperforming state-of-the-art methods by 16%. Additionally, Triple-S demonstrated remarkable robustness. 
+We propose the Triple-S(Simplify-Solution-Summary) framework, which leverages the In-Context Learning capabilities of multiple LLMs to generate more robust policy code. This is a lightweight, training-free approach. The effectiveness and robustness of the Triple-S framework were validated through tests on the Long-horizon Desktop Abstract Placement[(LDAP)](dataset/README.md) dataset, which includes instruction and environment state abstractions, and across models with varying capabilities.
 
 ![The framework of Triple-S](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/Triple-S.png)
 

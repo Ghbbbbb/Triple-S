@@ -133,7 +133,7 @@ def write_goal_positions_to_json2(env, filename):
         print(f"An error occurred while writing goal positions to JSON file: {e}")
 
 
-def main(WRITE="GPT3.5_LDAP1_TEST", IS_DOC=False, IS_ENV2=False):
+def main(WRITE="GPT3.5_LDIP1_TEST", IS_DOC=False, IS_ENV2=False):
     logging.info("Initializing TCP...")
     HOST = ''
     ss = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -207,7 +207,7 @@ def main(WRITE="GPT3.5_LDAP1_TEST", IS_DOC=False, IS_ENV2=False):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="Server for interacting with robot via various input methods.")
-    parser.add_argument("--write", type=str, default="GPT3.5_LDAP1_TEST", help="Specify the write directory")
+    parser.add_argument("--write", type=str, default="GPT3.5_LDIP1_TEST", help="Specify the write directory")
     parser.add_argument("--doc", action="store_true", help="Run in document mode else in debug mode")
     parser.add_argument("--env2", action="store_true", help="Run in environment2 else in environment1")
     args = parser.parse_args()

@@ -1,11 +1,36 @@
 <h1 align="center">
 Long-horizon Desktop Abstract Placement
 </h1>
-This is a dataset for cube place on desktop, known as the Long-horizon Desktop Abstract Placement(LDAP) dataset, which is based on the Robopal simulation environment (`robopal`), and includes both observable and partially abservable scenarios, as shown in figure below. In the observable scenario, there are 224 instructions, more than half of which involve abstract tasks. This scenario includes four differently colored cubes and two differently colored cups. In this setting, the LLM needs to further simplify the instructions to map the objects mentioned in the instructions to those present in the environment. In the partially observable scenario, there are 97 tasks with abstract environmental states, involving three movable cubes of varying masses, one fixed cube, and two differently colored cups. In this setting, LLMs needs to introduce additional sensors (additional advanced APIs) to acquire information, thereby increasing the extra code prediction workload.
+This is a Long-horizon Desktop Implicative Placement(LDIP) dataset, which is based on the Robopal simulation environment (`robopal`), and includes both observable and partially abservable scenarios, as shown in figure below. The observable environment contains 500 tasks, with more than half involving instruction implication, which reasoning on relative positioning, color, and geometry. It includes four differently colored and shaped blocks and two differently colored cups. In this scenario, the LLM needs to simplify the instructions to correctly match objects in the instructions with those in the environment. In the partially observable environment, there are 97 tasks involving environment implication, with three movable blocks of different weights, one fixed block, and two different colored cups. In this case, standard visual detection models cannot differentiate the blocks, requiring the use of a gravity sensor, which adds to the LLM’s code prediction burden.
 
 
-![Introduction of LDAP](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/LDAP.png)
-## 1.Explanation of high-level API:
+![Introduction of LDIP](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/LDIP.png)
+
+### An Example
+![Example of LDIP](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/Example.png)
+
+### 1.Explanation of each JSON file:
+
+- **LDIP1.json**: Includes a total of 500 data points in the observable environment. Each sample is structured as follows:
+```
+{
+    "instruction": str,     # User-inputted instruction
+    "code": str,            # Corresponding policy code
+    "goal_pos": str,        # The ground truth state of object and gripper
+    "task": str             # Type of task, categorized as "Short_step_no_inference", "Short_step_with_inference", "Long_step_no_inference", "Long_step_with_inference"
+}
+```
+
+- **LDIP2.json**: Includes a total of 97 data points in the partially abservable environment. Each sample is structured as follows:
+```
+{
+    "instruction": str,     # User-inputted instruction
+    "code": str,            # Corresponding policy code
+    "goal_pos": str,        # The ground truth state of object and gripper
+}
+```
+
+### 2.Explanation of high-level API:
 
 **pri.gripper_ctrl(command)**: Ctrl the gripper, param 'command' is a string type, consist of 'open' and 'close'.
 
@@ -22,25 +47,3 @@ This is a dataset for cube place on desktop, known as the Long-horizon Desktop A
 **pri.get_obj_mass(self, name: str)**: Get the mass of the object.
 
 **pri.say(content:str)**: Say something if you don't understand the command.
-
-
-### 2.Explanation of each JSON file:
-
-- **LDAP1.json**: Includes a total of 224 data points in the observable environment. Each sample is structured as follows:
-```
-{
-    "instruction": str,     # User-inputted instruction
-    "code": str,            # Corresponding policy code
-    "goal_pos": str,        # The ground truth state of object and gripper
-    "task": str             # Type of task, categorized as "Short_step_no_inference", "Short_step_with_inference", "Long_step_no_inference", "Long_step_with_inference"
-}
-```
-
-- **LDAP2.json**: Includes a total of 78 data points in the partially abservable environment. Each sample is structured as follows:
-```
-{
-    "instruction": str,     # User-inputted instruction
-    "code": str,            # Corresponding policy code
-    "goal_pos": str,        # The ground truth state of object and gripper
-}
-```

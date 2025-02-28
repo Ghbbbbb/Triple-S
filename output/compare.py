@@ -88,7 +88,7 @@ def compare_positions(txt_data, json_data, env, threshold=0.05):
     return accuracy, incorrect_lines, detailed_errors, mean_error
 
 # Choose the appropriate JSON file path based on the environment
-json_file_path = '../dataset/LDAP1.json' if args.env == 'env1' else '../dataset/LDAP2.json'
+json_file_path = '../dataset/LDIP1.json' if args.env == 'env1' else '../dataset/LDIP2.json'
 
 txt_data = load_txt_data(args.file)
 json_data = load_json_data(json_file_path)

@@ -1,0 +1,22 @@
+[
+    {
+        "name":"block1",
+        "color":"red",
+        "shape":"square"
+    },
+    {
+        "name":"block2",
+        "color":"green",
+        "shape":"triangle"
+    },
+    {
+        "name":"block3",
+        "color":"blue",
+        "shape":"circle"
+    },
+    {
+        "name":"block4",
+        "color":"yellow",
+        "shape":"hexagon"
+    }
+]

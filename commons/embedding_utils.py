@@ -8,7 +8,7 @@ def load_docs(prompt_doc):
     """
     Load documents from a text file and split them into chunks of 1000 characters.
     """
-    loader = TextLoader(os.path.join(os.path.dirname(__file__), "../prompts/{}/task_settings.txt".format(prompt_doc)))
+    loader = TextLoader(os.path.join(os.path.dirname(__file__), "../prompts/{}/task_settings.txt".format(prompt_doc)),encoding="utf-8")
     documents = loader.load()
     text_splitter = CharacterTextSplitter(separator="---", chunk_size=500, chunk_overlap=20)
     docs = text_splitter.split_documents(documents)

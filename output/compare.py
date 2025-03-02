@@ -9,12 +9,12 @@ parser.add_argument("--env", required=True, choices=['env1', 'env2'], help="Spec
 args = parser.parse_args()
 
 def load_txt_data(file_path):
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding="utf-8") as file:
         lines = file.readlines()
     return [json.loads(line) for line in lines]
 
 def load_json_data(file_path):
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding="utf-8") as file:
         data = json.load(file)
     return [item['goal_pos'] for item in data]
 

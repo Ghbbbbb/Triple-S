@@ -20,13 +20,14 @@ black_pos, black_quat = pri.get_obj_pose('black_mug')
 target_pos = black_pos + np.array([0, 0.15, 0])
 pri.move(target_pos, black_quat)```"
 #example3
-user: Position the gripper 15cm forward of the butter colored block.
+#example3
+user: Position the gripper 15cm forward of the no-corners block.
 you:"```python
-# butter color is yellow, so first to get the pose of yellow_block
-yellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')
+# no-corners is circle, so first to get the pose of circle_block
+circle_pos, circle_quat = pri.get_obj_pose('circle_block')
 # calculate the target position, then move to the target position, forward is +x, so is np.array([0.15, 0, 0])
-target_pos = yellow_pos + np.array([0.15, 0, 0])
-pri.move(target_pos, yellow_quat)```"
+target_pos = circle_pos + np.array([0.15, 0, 0])
+pri.move(target_pos, circle_quat)```"
 ---
 
 [task description]
@@ -71,10 +72,10 @@ pri.grab('red_block')
 # reset the robot
 pri.reset_robot()```"
 #example2
-user: grab the grass colored block.
+user: grab the 180°-interior angles block.
 you:"```python
-# grass color is green, so pick up the green_block
-pri.grab('green_block')
+# 180°-interior angles is triangle, so pick up the triangle_block
+pri.grab('triangle_block')
 # reset the robot
 pri.reset_robot()```"
 #example3
@@ -94,6 +95,23 @@ cloest_obj = sorted_distances[0][0]
 pri.grab(cloest_obj)
 # reset the robot
 pri.reset_robot()```"
+#example4
+user: please pick up the block that is the cloest to the circle block
+you:"```python
+#calculate the pose of square_block, hexagon_block, triangle_block, circle_block
+square_pos, square_quat = pri.get_obj_pose('square_block')
+hexagon_pos, hexagon_quat = pri.get_obj_pose('hexagon_block')
+triangle_pos, triangle_quat = pri.get_obj_pose('triangle_block')
+circle_pos, circle_quat = pri.get_obj_pose('circle_block')
+# calculate the distance between circle_block and other blocks
+distances={'square_block':np.linalg.norm(circle_pos-square_pos),'hexagon_block':np.linalg.norm(circle_pos-hexagon_pos),'triangle_block':np.linalg.norm(circle_pos-triangle_pos)}
+sorted_distances = sorted(distances.items(), key=lambda item:item[1])
+# get the cloest block
+cloest_obj = sorted_distances[0][0]
+# pick up the cloest block
+pri.grab(cloest_obj)
+# reset the robot
+pri.reset_robot()```"
 ---
 
 [task description]
@@ -102,23 +120,23 @@ Stack the specified block on the specified blocks or mugs.
 Use the `stack_object_on_object()` function to stack the block on blocks or mugs, then reset to initial pose by `reset_robot()`.
 [examples]
 #example1
-user: "Stack the red_block on the black_mug then stack the blue_block on the white_mug."
+user: "Stack the red_block on the black_mug then stack the circle_block on the white_mug."
 you: "```python
 # stack the red_block on the black_mug
 pri.stack_object_on_object('red_block', 'black_mug')
-# stack the blue_block on the white_mug
-pri.stack_object_on_object('blue_block', 'white_mug')
+# stack the circle_block on the white_mug
+pri.stack_object_on_object('circle_block', 'white_mug')
 # reset the robot
 pri.reset_robot()```"
 #example2
-user: "Stack the blue, yellow and green cubes on top of the red cube in order."
+user: "Stack the blue, hexagon and triangle blocks on top of the red block in order."
 you:"```python
 # stack the blue_block on the red_block
 pri.stack_object_on_object('blue_block', 'red_block')
-# stack the yellow_block on the blue_block
-pri.stack_object_on_object('yellow_block', 'blue_block')
-# stack the green_block on the yellow_block
-pri.stack_object_on_object('green_block', 'yellow_block')
+# stack the hexagon_block on the blue_block
+pri.stack_object_on_object('hexagon_block', 'blue_block')
+# stack the triangle_block on the hexagon_block
+pri.stack_object_on_object('triangle_block', 'hexagon_block')
 # reset the robot
 pri.reset_robot()```"
 ---
@@ -129,17 +147,17 @@ Pick up the block and place it relative to another object in a specified directi
 Use the `pick_and_place_next_to()` function to pick up an object and place it in relation to another object, then reset to initial pose by `reset_robot()`.
 [examples]
 #example1
-user: "Move the blue block 10cm backward to the green block."
+user: "Move the circle block 10cm backward to the green block."
 you:"```python
-#move the blue_block 10cm backward to the green_block.
-pri.pick_and_place_next_to('blue_block', 'green_block', 'backward', 0.1)
+#move the circle_block 10cm backward to the green_block.
+pri.pick_and_place_next_to('circle_block', 'green_block', 'backward', 0.1)
 # reset the robot
 pri.reset_robot()```"
 #example2
-user: "Pick up the blue block and position it 8cm right to the red block."
+user: "Pick up the blue block and position it 8cm right to the square block."
 you:"```python
-# Move the blue_block 8cm right to the red_block
-pri.pick_and_place_next_to('blue_block', 'red_block', 'right', 0.08)
+# Move the blue_block 8cm right to the square_block
+pri.pick_and_place_next_to('blue_block', 'square_block', 'right', 0.08)
 # reset the robot
 pri.reset_robot()```"
 ---

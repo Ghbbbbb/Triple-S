@@ -1,5 +1,6 @@
 import numpy as np
 import time
+import json
 
 from robopal.envs import RobotEnv
 from robopal.robots.diana_med import DianaGraspMultiObjs,DianaGraspMultiObjs_Partobservable
@@ -12,6 +13,10 @@ def primitive(func, checker=None):
 
     return primitive_wrapper
 
+with open("./commons/info.json", "r") as f:
+    blocks_info = json.load(f)
+
+name_map = {block["shape"]: block["color"] for block in blocks_info}
 
 class GraspingEnv(RobotEnv):
     def __init__(self,
@@ -46,9 +51,11 @@ class GraspingEnv(RobotEnv):
 
     @primitive
     def get_obj_pose(self, obj_name):
-        pos = self.mj_data.body(obj_name).xpos.copy()
+        key_name = obj_name.replace("_block", "")  
+        target_obj_name = key_name if key_name.endswith("mug") else f"{name_map.get(key_name, key_name)}_block"
+        pos = self.mj_data.body(target_obj_name).xpos.copy()
         pos[2] -= 0.31
-        quat = self.mj_data.body(obj_name).xquat.copy()
+        quat = self.mj_data.body(target_obj_name).xquat.copy()
         return pos, quat
 
     @primitive

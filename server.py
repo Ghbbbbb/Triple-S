@@ -54,7 +54,7 @@ def execute_python_code(pri, code, IS_ENV2):
             if IS_ENV2:
                 e = str(e).split(".")[0] + ". Valid names: ['block1', 'block2', 'block3', 'block4', 'white_mug', 'black_mug']"
             else:
-                e = str(e).split(".")[0] + ". Valid names: ['green_block', 'red_block', 'yellow_block', 'blue_block', 'white_mug', 'black_mug']"
+                e = str(e).split(".")[0] + ". Valid names: ['red_block', 'blue_block', 'green_block', 'yellow_block', 'triangle_block', 'circle_block', 'square_block', 'hexagon_block', 'white_mug', 'black_mug'.]"
         exec("pri.reset_robot()")
         return False, str(e)
 

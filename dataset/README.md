@@ -1,5 +1,5 @@
 <h1 align="center">
-Long-horizon Desktop Abstract Placement
+Long-horizon Desktop Implicative Placement
 </h1>
 This is a Long-horizon Desktop Implicative Placement(LDIP) dataset, which is based on the Robopal simulation environment (`robopal`), and includes both observable and partially abservable scenarios, as shown in figure below. The observable environment contains 500 tasks, with more than half involving instruction implication, which reasoning on relative positioning, color, and geometry. It includes four differently colored and shaped blocks and two differently colored cups. In this scenario, the LLM needs to simplify the instructions to correctly match objects in the instructions with those in the environment. In the partially observable environment, there are 97 tasks involving environment implication, with three movable blocks of different weights, one fixed block, and two different colored cups. In this case, standard visual detection models cannot differentiate the blocks, requiring the use of a gravity sensor, which adds to the LLM’s code prediction burden.
 
@@ -9,20 +9,12 @@ This is a Long-horizon Desktop Implicative Placement(LDIP) dataset, which is bas
 ### An Example
 ![Example of LDIP](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/Example.png)
 
-### 1.Explanation of each JSON file:
+### 1.Explanation of JSON file:
 
-- **LDIP1.json**: Includes a total of 500 data points in the observable environment. Each sample is structured as follows:
+- **LDIP1.json**: Includes a total of 500 data points in the observable environment. 
+- **LDIP2.json**: Includes a total of 97 data points in the partially abservable environment. 
 ```
-{
-    "instruction": str,     # User-inputted instruction
-    "code": str,            # Corresponding policy code
-    "goal_pos": str,        # The ground truth state of object and gripper
-    "task": str             # Type of task, categorized as "Short_step_no_inference", "Short_step_with_inference", "Long_step_no_inference", "Long_step_with_inference"
-}
-```
-
-- **LDIP2.json**: Includes a total of 97 data points in the partially abservable environment. Each sample is structured as follows:
-```
+# All samples are structured as follows:
 {
     "instruction": str,     # User-inputted instruction
     "code": str,            # Corresponding policy code

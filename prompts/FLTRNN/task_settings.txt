@@ -20,13 +20,13 @@ black_pos, black_quat = pri.get_obj_pose('black_mug')
 target_pos = black_pos + np.array([0, 0.15, 0])
 pri.move(target_pos, black_quat)```"
 #example3
-user: Position the gripper 15cm forward of the butter colored block.
+user: Position the gripper 15cm forward of the no-corners block.
 you:"```python
-# butter color is yellow, so first to get the pose of yellow_block
-yellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')
+# no-corners is circle, so first to get the pose of circle_block
+circle_pos, circle_quat = pri.get_obj_pose('circle_block')
 # calculate the target position, then move to the target position, forward is +x, so is np.array([0.15, 0, 0])
-target_pos = yellow_pos + np.array([0.15, 0, 0])
-pri.move(target_pos, yellow_quat)```"
+target_pos = circle_pos + np.array([0.15, 0, 0])
+pri.move(target_pos, circle_quat)```"
 ---
 
 [task description]
@@ -83,22 +83,39 @@ pri.grab('red_block')
 # reset the robot
 pri.reset_robot()```"
 #example2
-user: grab the grass colored block.
+user: grab the 180°-interior angles block.
 you:"```python
-# grass color is green, so pick up the green_block
-pri.grab('green_block')
+# 180°-interior angles is triangle, so pick up the triangle_block
+pri.grab('triangle_block')
 # reset the robot
 pri.reset_robot()```"
 #example3
 user: please pick up the block that is the cloest to the yellow block
 you:"```python
-# calculate the pose of red_block, blue_block， green_block, yellow_block
+# calculate the pose of red_block, blue_block, green_block, yellow_block
 red_pos, red_quat = pri.get_obj_pose('red_block')
 blue_pos, blue_quat = pri.get_obj_pose('blue_block')
 green_pos, green_quat = pri.get_obj_pose('green_block')
 yellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')
 # calculate the distance between yellow_block and other blocks
 distances={'blue_block':np.linalg.norm(yellow_pos-blue_pos),'green_block':np.linalg.norm(yellow_pos-green_pos),'red_block':np.linalg.norm(yellow_pos-red_pos)}
+sorted_distances = sorted(distances.items(), key=lambda item:item[1])
+# get the cloest block
+cloest_obj = sorted_distances[0][0]
+# pick up the cloest block
+pri.grab(cloest_obj)
+# reset the robot
+pri.reset_robot()```"
+#example4
+user: please pick up the block that is the cloest to the circle block
+you:"```python
+#calculate the pose of square_block, hexagon_block, triangle_block, circle_block
+square_pos, square_quat = pri.get_obj_pose('square_block')
+hexagon_pos, hexagon_quat = pri.get_obj_pose('hexagon_block')
+triangle_pos, triangle_quat = pri.get_obj_pose('triangle_block')
+circle_pos, circle_quat = pri.get_obj_pose('circle_block')
+# calculate the distance between circle_block and other blocks
+distances={'square_block':np.linalg.norm(circle_pos-square_pos),'hexagon_block':np.linalg.norm(circle_pos-hexagon_pos),'triangle_block':np.linalg.norm(circle_pos-triangle_pos)}
 sorted_distances = sorted(distances.items(), key=lambda item:item[1])
 # get the cloest block
 cloest_obj = sorted_distances[0][0]
@@ -125,16 +142,16 @@ pri.gripper_ctrl('open')
 # reset the robot
 pri.reset_robot()```"
 #example2
-user:Place the red block on the blue block, then stack the yellow block on top.
+user:Place the red block on the blue block, then stack the hexagon block on top.
 you:"```python
 # stack the red_block on the blue_block
 pri.grab('red_block')
 blue_pos, blue_quat = pri.get_obj_pose('blue_block')
 transition_pos = blue_pos + np.array([0, 0, 0.1])
-pri.move(target_pos, blue_quat)
+pri.move(transition_pos, blue_quat)
 pri.gripper_ctrl('open')
-# stack the yellow_block on the red_block
-pri.grab('yellow_block')
+# stack the hexagon_block on the red_block
+pri.grab('hexagon_block')
 red_pos, red_quat = pri.get_obj_pose('red_block')
 transition_pos = red_pos + np.array([0, 0, 0.1])
 pri.move(transition_pos, red_quat)
@@ -142,43 +159,43 @@ pri.gripper_ctrl('open')
 # reset the robot
 pri.reset_robot()```"
 #example3
-user:Stack the blue, yellow and green cubes on top of the red cube in order.
+user:Stack the cirlue, yellow and green blocks on top of the square block in order.#note only the circle block is stack on the square block.
 you:"```python
-# stack the blue_block on the red_block
-pri.grab('blue_block')
-red_pos, red_quat = pri.get_obj_pose('red_block')
-transition_pos = red_pos + np.array([0, 0, 0.1])
-pri.move(target_pos, red_quat)
+# stack the circle_block on the square_block
+pri.grab('circle_block')
+square_pos, square_quat = pri.get_obj_pose('square_block')
+transition_pos = square_pos + np.array([0, 0, 0.1])
+pri.move(transition_pos, square_quat)
 pri.gripper_ctrl('open')
-# stack the yellow_block on the blue_block
+# stack the yellow_block on the circle_block
 pri.grab('yellow_block')
-blue_pos, blue_quat = pri.get_obj_pose('blue_block')
-transition_pos = blue_pos + np.array([0, 0, 0.1])
-pri.move(target_pos, blue_quat)
+circle_pos, circle_quat = pri.get_obj_pose('circle_block')
+transition_pos = circle_pos + np.array([0, 0, 0.1])
+pri.move(transition_pos, circle_quat)
 pri.gripper_ctrl('open')
 # stack the green_block on the yellow_block
 pri.grab('green_block')
 yellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')
 transition_pos = yellow_pos + np.array([0, 0, 0.1])
-pri.move(target_pos, yellow_quat)
+pri.move(transition_pos, yellow_quat)
 pri.gripper_ctrl('open')
 # reset the robot
 pri.reset_robot()```"
 #example4
-user:Stack the ocean, grass colored cubes on top of the apple colored cube in order.
+user:Stack the ocean, three angles blocks on top of the apple colored block in order.
 you:"```python
-# ocean is blue, grass is green, apple is red, so we need to stack the blue_block, green_block on the red_block in order
+# ocean is blue, three angles is triangle, apple is red, so we need to stack the blue_block, triangle_block on the red_block in order
 # stack the blue_block on the red_block
 pri.grab('blue_block')
 red_pos, red_quat = pri.get_obj_pose('red_block')
 transition_pos = red_pos + np.array([0, 0, 0.1])
-pri.move(target_pos, red_quat)
+pri.move(transition_pos, red_quat)
 pri.gripper_ctrl('open')
-# stack the green_block on the blue_block
-pri.grab('green_block')
+# stack the triangle_block on the blue_block
+pri.grab('triangle_block')
 blue_pos, blue_quat = pri.get_obj_pose('blue_block')
 transition_pos = blue_pos + np.array([0, 0, 0.1])
-pri.move(target_pos, blue_quat)
+pri.move(transition_pos, blue_quat)
 pri.gripper_ctrl('open')
 # reset the robot
 pri.reset_robot()```"
@@ -201,11 +218,11 @@ pri.gripper_ctrl('open')
 # reset the robot
 pri.reset_robot()```"
 #example2:
-user: pick up the sky colored block and place it on the milk colored mug.
+user: pick up the most angles block and place it on the milk colored mug.
 you:"```python
-# sky is blue, milk is white, so sky colored block is blue_block, milk colored mug is white_mug
-# stack the blue_block on the white_mug
-pri.grab('blue_block')
+# most angles is hexagon, milk is white, so most angles block is heaxgon_block, milk colored mug is white_mug
+# stack the heaxgon_block on the white_mug
+pri.grab('heaxgon_block')
 white_pos, white_quat = pri.get_obj_pose('white_mug')
 transition_pos = white_pos + np.array([0, 0, 0.15])
 pri.move(transition_pos,white_quat)
@@ -234,24 +251,24 @@ pri.gripper_ctrl('open')
 # reset the robot
 pri.reset_robot()```"
 #example2
-user: "Move the blue block 10cm backward to the green block."
+user: "Move the blue block 10cm backward to the triangle block."
 you:"```python
 #pick up the blue_block
 pri.grab('blue_block')
 # calculate the target position and transition position, backward is -x, so 10cm backward is np.array([-0.1, 0, 0])
-green_pos, green_quat = pri.get_obj_pose('green_block')
-target_pos = green_pos + np.array([-0.1, 0, 0])
+triangle_pos, triangle_quat = pri.get_obj_pose('triangle_block')
+target_pos = triangle_pos + np.array([-0.1, 0, 0])
 transition_pos = target_pos + np.array([0, 0, 0.1])
 # move to the transition position then open the gripper
-pri.move(transition_pos, green_quat)
+pri.move(transition_pos, triangle_quat)
 pri.gripper_ctrl('open')
 # reset the robot
 pri.reset_robot()```"
 #example3
-user: "Pick up the blue block and position it 8cm right to the red block."
+user: "Pick up the circle block and position it 8cm right to the red block."
 you:"```python
-# pick up the blue_block
-pri.grab('blue_block')
+# pick up the circle_block
+pri.grab('circle_block')
 # calculate the target position and transition position, right is -y, so 8cm right is np.array([0, -0.08, 0])
 red_pos, red_quat = pri.get_obj_pose('red_block')
 target_pos = red_pos + np.array([0, -0.08, 0])
@@ -262,11 +279,11 @@ pri.gripper_ctrl('open')
 # reset the robot
 pri.reset_robot()```"
 #example4
-user: "Pick up the banana colored block and position it 15cm front to the black mug."
+user: "Pick up the 720°-inner angles block and position it 15cm front to the black mug."
 you:"```python
-# banana is yellow, so banana color block is yellow_block
-# pick up the yellow_block
-pri.grab('yellow_block')
+# 720°-inner angles is hexagon, so 720°-inner angles block is hexagon_block
+# pick up the hexagon_block
+pri.grab('hexagon_block')
 # calculate the target position and transition position, front is +x, so 15cm front is np.array([0.15, 0, 0])
 black_pos, black_quat = pri.get_obj_pose('black_mug')
 target_pos = black_pos + np.array([0.15, 0, 0])
@@ -277,7 +294,6 @@ pri.gripper_ctrl('open')
 # reset the robot
 pri.reset_robot()```"
 ---
-
 
 [task description]
 You can use the pri.say() func if the existing functions cannot solve user robot instructions:

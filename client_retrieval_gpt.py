@@ -17,12 +17,13 @@ logging.basicConfig(level=logging.INFO)
 class GPTAssistant:
     """ Load ChatGPT config and your custom pre-prompts. """
 
-    def __init__(self, verbose=False, prompt_doc="LDAP1_BASE") -> None:
+    def __init__(self, verbose=False, prompt_doc="LDIP1_BASE") -> None:
         
 
         logging.info("Initialize LLM...")
         self.llm = ChatOpenAI(
             model="gpt-3.5-turbo-16k-0613",
+            # openai_api_base="https://api.gpts.vin/v1",
             temperature=0,
             max_tokens=2048,
         )
@@ -119,7 +120,7 @@ def extract_and_format(input_str):
 
     return formatted_result
 
-def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "LDAP1_BASE", TASK = "LDAP1"):
+def main(IS_DEBUG = False, IS_DOC = False, PROMPT_DOC = "LDIP1_BASE", TASK = "LDIP1"):
     os.environ["TOKENIZERS_PARALLELISM"] = "false"
     gpt = GPTAssistant(
         verbose=False,prompt_doc=PROMPT_DOC
@@ -214,8 +215,8 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run the GPTAssistant")
     parser.add_argument("--debug", action="store_true", help="Enable debug mode")
     parser.add_argument("--doc", action="store_true", help="Enable documentation mode")
-    parser.add_argument("--prompt", type=str, default="LDAP1_BASE", help="Specify the prompt directory")
-    parser.add_argument("--task", type=str, default="LDAP1", help="Specify the dataset directory")
+    parser.add_argument("--prompt", type=str, default="LDIP1_BASE", help="Specify the prompt directory")
+    parser.add_argument("--task", type=str, default="LDIP1", help="Specify the dataset directory")
 
     args = parser.parse_args()
     main(IS_DEBUG=args.debug, IS_DOC=args.doc, PROMPT_DOC=args.prompt, TASK=args.task)

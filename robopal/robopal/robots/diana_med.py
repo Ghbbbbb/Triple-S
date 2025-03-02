@@ -71,20 +71,22 @@ class DianaGraspMultiObjs(DianaGrasp):
         random_x_pos_green, random_y_pos_green, random_quat_green = generate_random_pose()
         while self.check_distance([random_x_pos_red, random_y_pos_red], [random_x_pos_green, random_y_pos_green]):
             random_x_pos_green, random_y_pos_green, random_quat_green = generate_random_pose()
-        self.mjcf_generator.add_node_from_xml(ASSET_DIR + '/objects/cube/green_cube.xml')
+        self.mjcf_generator.add_node_from_xml(ASSET_DIR + '/objects/cube/green_triangle.xml')
         pos_str_green = f"{random_x_pos_green} {random_y_pos_green} 0.44098543"
         quat_str_green = f"1 0 0 {random_quat_green}"
         self.mjcf_generator.set_node_attrib('body', 'green_block', {'pos': pos_str_green, 'quat': quat_str_green})
+
         
         # 生成蓝色块的随机位置和姿态
         random_x_pos_blue, random_y_pos_blue, random_quat_blue = generate_random_pose()
         while self.check_distance([random_x_pos_red, random_y_pos_red], [random_x_pos_blue, random_y_pos_blue]) or \
               self.check_distance([random_x_pos_green, random_y_pos_green], [random_x_pos_blue, random_y_pos_blue]):
             random_x_pos_blue, random_y_pos_blue, random_quat_blue = generate_random_pose()
-        self.mjcf_generator.add_node_from_xml(ASSET_DIR + '/objects/cube/blue_cube.xml')
+        self.mjcf_generator.add_node_from_xml(ASSET_DIR + '/objects/cube/blue_cylinder.xml')
         pos_str_blue = f"{random_x_pos_blue} {random_y_pos_blue} 0.44098543"
         quat_str_blue = f"1 0 0 {random_quat_blue}"
         self.mjcf_generator.set_node_attrib('body', 'blue_block', {'pos': pos_str_blue, 'quat': quat_str_blue})
+
         
         # 生成黄色块的随机位置和姿态
         random_x_pos_yellow, random_y_pos_yellow, random_quat_yellow = generate_random_pose()
@@ -92,10 +94,11 @@ class DianaGraspMultiObjs(DianaGrasp):
               self.check_distance([random_x_pos_green, random_y_pos_green], [random_x_pos_yellow, random_y_pos_yellow]) or \
               self.check_distance([random_x_pos_blue, random_y_pos_blue], [random_x_pos_yellow, random_y_pos_yellow]):
             random_x_pos_yellow, random_y_pos_yellow, random_quat_yellow = generate_random_pose()
-        self.mjcf_generator.add_node_from_xml(ASSET_DIR + '/objects/cube/yellow_cube.xml')
+        self.mjcf_generator.add_node_from_xml(ASSET_DIR + '/objects/cube/yellow_hexagon.xml')
         pos_str_yellow = f"{random_x_pos_yellow} {random_y_pos_yellow} 0.44098543"
         quat_str_yellow = f"1 0 0 {random_quat_yellow}"
         self.mjcf_generator.set_node_attrib('body', 'yellow_block', {'pos': pos_str_yellow, 'quat': quat_str_yellow})
+
         
         # 生成白色杯子的随机位置
         random_x_pos_white, random_y_pos_white, random_quat_white = generate_random_pose()

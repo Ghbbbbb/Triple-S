@@ -86,7 +86,7 @@ pri.reset_robot()```"
 #example3
 user: please pick up the block that is the cloest to the yellow block
 you:"```python
-#calculate the pose of red_block, blue_block， green_block, yellow_block
+# calculate the pose of red_block, blue_block, green_block, yellow_block
 red_pos, red_quat = pri.get_obj_pose('red_block')
 blue_pos, blue_quat = pri.get_obj_pose('blue_block')
 green_pos, green_quat = pri.get_obj_pose('green_block')
@@ -140,7 +140,7 @@ you:"```python
 pri.grab('red_block')
 blue_pos, blue_quat = pri.get_obj_pose('blue_block')
 transition_pos = blue_pos + np.array([0, 0, 0.1])
-pri.move(target_pos, blue_quat)
+pri.move(transition_pos, blue_quat)
 pri.gripper_ctrl('open')
 # stack the hexagon_block on the red_block
 pri.grab('hexagon_block')

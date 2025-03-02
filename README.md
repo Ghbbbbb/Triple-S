@@ -24,13 +24,13 @@ Install requirements for repository
 - gpt
 ```
 export OPENAI_API_KEY=[YOUR_KEY]
-python server.py --doc --write "GPT3.5_LDIP1_ours"
+python server.py --doc --write "GPT3.5-LDIP1-ours"
 python client_retrieval_gpt.py --doc --prompt "ours" --task "LDIP1"
 ```
 
 - llama3
 ```
-python server.py --doc --env2 --write "LLAMA3_LDIP2_ours"
+python server.py --doc --env2 --write "LLAMA3-LDIP2-ours"
 python client_retrieval_llama3.py --doc --prompt "ours" --task "LDIP2"
 ```
 

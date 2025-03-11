@@ -12,6 +12,6 @@ opencv_contrib_python==4.9.0.80
 opencv_python==4.9.0.80
 ruckig==0.14.0
 sentence-transformers==2.7.0
-setuptools==69.5.1
+setuptools==70.0.0
 tqdm==4.66.4
-transformers==4.40.1
+transformers==4.48.0

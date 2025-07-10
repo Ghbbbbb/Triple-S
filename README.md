@@ -25,12 +25,12 @@ export HF_ENDPOINT = https://hf-mirror.com  # Set this mirror if you cannot acce
 ```
 
 ### 2. Execution Modes
-### 2.1 Debug Mode (Tests LLM policy generation without robot control)
+#### 2.1 Debug Mode (Tests LLM policy generation without robot control)
 ```bash
 # Tests GPT using LDIP1_v1 task prompts (manual instruction input)
 python client_retrieval_gpt.py --debug --prompt "ours" --task "LDIP1_v1" 
 ```
-### 2.2 Simulation Mode (Tests policy execution with robot simulation)
+#### 2.2 Simulation Mode (Tests policy execution with robot simulation)
 ```bash
 # Start simulation environment (saves results to test.txt)
 python server.py --write "test" --env 1  
@@ -38,7 +38,7 @@ python server.py --write "test" --env 1
 # Generate policy code with GPT and execute in simulation
 python client_retrieval_gpt.py --prompt "ours" --task "LDIP1_v1"  
 ```
-### 2.3 Dataset Mode (Run dataset instructions and save results)
+#### 2.3 Dataset Mode (Run dataset instructions and save results)
 ```bash
 # Start simulation environment (will reset environment state after each run)
 python server.py --doc --write "GPT3.5_ours" --env 1
@@ -73,4 +73,4 @@ Each of these contributions has been pivotal in shaping our work. We're incredib
 
 ## 📄 License 
 
-Our project is open-sourced under the MIT license. Feel free to explore, modify, and share your innovations with the world.# Triple-S
+Our project is open-sourced under the MIT license. Feel free to explore, modify, and share your innovations with the world.

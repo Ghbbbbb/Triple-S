@@ -1,8 +1,10 @@
 <h1 align="center">
 Long-horizon Desktop Implicative Placement (LDIP)
 </h1>
+This is a Long-horizon Desktop Implicative Placement(LDIP) dataset, which is based on the Robopal simulation environment (`robopal`), and includes both observable and partially abservable scenarios, as shown in figure below. The observable environment contains 500 tasks, with more than half involving instruction implication, which reasoning on relative positioning, color, and geometry. It includes four differently colored and shaped blocks and two differently colored cups. In this scenario, the LLM needs to simplify the instructions to correctly match objects in the instructions with those in the environment. In the partially observable environment, there are 97 tasks involving environment implication, with three movable blocks of different weights, one fixed block, and two different colored cups. In this case, standard visual detection models cannot differentiate the blocks, requiring the use of a gravity sensor, which adds to the LLM’s code prediction burden.
 
 ![LDIP Introduction](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/LDIP.png)
+
 
 ## Dataset Versions
 | Version | File | Scenarios | Tasks | Description |
@@ -22,11 +24,12 @@ Long-horizon Desktop Implicative Placement (LDIP)
   - 97 environment implication tasks
   - Requires gravity sensor (beyond standard vision)
 
+## An Example
 ![Task Example](https://github.com/Ghbbbbb/Triple-S/blob/main/assets/Example.png)
 
 ## Data Structure
 ### 1.All JSON files follow this schema:
-```json
+```bash
 {
     "instruction": str,     // Natural language instruction
     "code": str,            // Executable policy code

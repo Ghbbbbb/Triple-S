@@ -1,0 +1,291 @@
+[task description]
+Move the gripper to a special position and not grab anything.
+[role thought]
+First you need to get the obj_pose by `pri.get_obj_pose()`, then calculate the target_pos by `obj_pose + np.array([x,y,z])`,here [x,y,z] is the position you need to fill according to the instruction, they obey the following match:{'forward':'+x','backward or behind':'-x','left':'+y','right':'-y','above':'+z'}. finally move the gripper to target_pos by `pri.move()`.
+[examples]
+#example1
+user: please move the gripper 15cm to the top of the block that has the color of grass.
+you: "```python
+# grass color is green, so first to get the pose of green_block
+green_pos, green_quat = pri.get_obj_pose('green_block')
+# calculate the target position, then move to the target position, top is +z, so is np.array([0, 0, 0.15])
+target_pos = green_pos + np.array([0, 0, 0.15])
+pri.move(target_pos, green_quat)```"
+#example2
+user: Move the gripper 15cm to the left of the mug that has the night color.
+you:"```python
+# night color is balck, so first to get the pose of bloak_mug
+black_pos, black_quat = pri.get_obj_pose('black_mug')
+# calculate the target position, then move to the target position, left is +y, so is np.array([0, 0.15, 0])
+target_pos = black_pos + np.array([0, 0.15, 0])
+pri.move(target_pos, black_quat)```"
+#example3
+user: Position the gripper 15cm forward of the butter colored block.
+you:"```python
+# butter color is yellow, so first to get the pose of yellow_block
+yellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')
+# calculate the target position, then move to the target position, forward is +x, so is np.array([0.15, 0, 0])
+target_pos = yellow_pos + np.array([0.15, 0, 0])
+pri.move(target_pos, yellow_quat)```"
+---
+
+[task description]
+Move the gripper to more than one position and not grab anything.
+[role thought]
+First you need to get the obj_pose by `pri.get_obj_pose()`, then calculate the target_pos by `obj_pose + np.array([x,y,z])`,here [x,y,z] is the position you need to fill according to the instruction, they obey the following match:{'forward':'+x','backward or behind':'-x','left':'+y','right':'-y','above':'+z'}, then move the gripper to target_pos by `pri.move()`, finally to repeat the process above until all positions have been reached.
+[examples]
+#example1
+user: Please move 8cm to your right, then 8cm to your front, then 8cm to your left, and finally 8cm to your back.
+you:"```python
+# get the current pose, then move 8cm to the right, right is -y, so is np.array([0, -0.08, 0])
+current_pos, current_quat = pri.get_current_pose()
+target_pos = current_pos + np.array([0, -0.08, 0])
+pri.move(target_pos, current_quat)
+# get the current pose, then move 8cm to the forward, forward is +x, so is np.array([0.08, 0, 0])
+current_pos, current_quat = pri.get_current_pose()
+target_pos = current_pos + np.array([0.08, 0, 0])
+pri.move(target_pos, current_quat)
+# get the current pose, then move 8cm to the left, left is +y, so is np.array([0, 0.08, 0])
+current_pos, current_quat = pri.get_current_pose()
+target_pos = current_pos + np.array([0, 0.08, 0])
+pri.move(target_pos, current_quat)
+# get the current pose, then move 8cm to the backward, backward is -x, so is np.array([-0.08, 0, 0])
+current_pos, current_quat = pri.get_current_pose()
+target_pos = current_pos + np.array([-0.08, 0, 0])
+pri.move(target_pos, current_quat)```"
+#example2
+user: Please move 10cm to your right, then open your claw, then move 15cm to the front, then close your gripper.
+you:"```python
+# get the current pose, then move 10cm to the right, right is -y, so is np.array([0, -0.1, 0])
+current_pos, current_quat = pri.get_current_pose()
+target_pos = current_pos + np.array([0, -0.1, 0])
+pri.move(target_pos, current_quat)
+# open the gripper
+pri.gripper_ctrl('open')
+# get the current pose, then move 15cm to the forward, forward is +x, so is np.array([0.15, 0, 0])
+current_pos, current_quat = pri.get_current_pose()
+target_pos = current_pos + np.array([0.15, 0, 0])
+pri.move(target_pos, current_quat)
+# close the gripper
+pri.gripper_ctrl('close')```"
+---
+
+[task description]
+Pick up a specified block.
+[role thought]
+First you need to thought what block you need to pick(if the instuction has descriptive colors, you need to match the block to "red_block", "green_block", "yellow_block", "blue_block", if the instruction has distance information like "farthest", "cloest", you need to calculate the distances between objects), then grab it by `pri.grab()`, finally reset to initial pose by `reset_robot()`.
+[examples]
+#example1
+user: please pick up the red block.
+you:"```python
+# pick up the red_block
+pri.grab('red_block')
+# reset the robot
+pri.reset_robot()```"
+#example2
+user: grab the grass colored block.
+you:"```python
+# grass color is green, so pick up the green_block
+pri.grab('green_block')
+# reset the robot
+pri.reset_robot()```"
+#example3
+user: please pick up the block that is the cloest to the yellow block
+you:"```python
+# calculate the pose of red_block, blue_block， green_block, yellow_block
+red_pos, red_quat = pri.get_obj_pose('red_block')
+blue_pos, blue_quat = pri.get_obj_pose('blue_block')
+green_pos, green_quat = pri.get_obj_pose('green_block')
+yellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')
+# calculate the distance between yellow_block and other blocks
+distances={'blue_block':np.linalg.norm(yellow_pos-blue_pos),'green_block':np.linalg.norm(yellow_pos-green_pos),'red_block':np.linalg.norm(yellow_pos-red_pos)}
+sorted_distances = sorted(distances.items(), key=lambda item:item[1])
+# get the cloest block
+cloest_obj = sorted_distances[0][0]
+# pick up the cloest block
+pri.grab(cloest_obj)
+# reset the robot
+pri.reset_robot()```"
+---
+
+[task description]
+Pick up a specified block and stack it on the other block.
+[role thought]
+Fisrt to grab the specified block by `pri.grab()`, then calculate the transition_pos which is 0.1m above the stacked block position, then move to the transition_pos and open the gripper(if there has multi block need to stack, you should repreat above steps until all the block has been stacked), finally reset to initial pose by `reset_robot()`.
+[examples]
+#example1
+user: stack the red block on the green block.
+you:"```python
+# stack the red_block on the green_block
+pri.grab('red_block')
+green_pos, green_quat = pri.get_obj_pose('green_block')
+transition_pos = green_pos + np.array([0, 0, 0.1])
+pri.move(transition_pos,green_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+#example2
+user:Place the red block on the blue block, then stack the yellow block on top.
+you:"```python
+# stack the red_block on the blue_block
+pri.grab('red_block')
+blue_pos, blue_quat = pri.get_obj_pose('blue_block')
+transition_pos = blue_pos + np.array([0, 0, 0.1])
+pri.move(target_pos, blue_quat)
+pri.gripper_ctrl('open')
+# stack the yellow_block on the red_block
+pri.grab('yellow_block')
+red_pos, red_quat = pri.get_obj_pose('red_block')
+transition_pos = red_pos + np.array([0, 0, 0.1])
+pri.move(transition_pos, red_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+#example3
+user:Stack the blue, yellow and green cubes on top of the red cube in order.
+you:"```python
+# stack the blue_block on the red_block
+pri.grab('blue_block')
+red_pos, red_quat = pri.get_obj_pose('red_block')
+transition_pos = red_pos + np.array([0, 0, 0.1])
+pri.move(target_pos, red_quat)
+pri.gripper_ctrl('open')
+# stack the yellow_block on the blue_block
+pri.grab('yellow_block')
+blue_pos, blue_quat = pri.get_obj_pose('blue_block')
+transition_pos = blue_pos + np.array([0, 0, 0.1])
+pri.move(target_pos, blue_quat)
+pri.gripper_ctrl('open')
+# stack the green_block on the yellow_block
+pri.grab('green_block')
+yellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')
+transition_pos = yellow_pos + np.array([0, 0, 0.1])
+pri.move(target_pos, yellow_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+#example4
+user:Stack the ocean, grass colored cubes on top of the apple colored cube in order.
+you:"```python
+# ocean is blue, grass is green, apple is red, so we need to stack the blue_block, green_block on the red_block in order
+# stack the blue_block on the red_block
+pri.grab('blue_block')
+red_pos, red_quat = pri.get_obj_pose('red_block')
+transition_pos = red_pos + np.array([0, 0, 0.1])
+pri.move(target_pos, red_quat)
+pri.gripper_ctrl('open')
+# stack the green_block on the blue_block
+pri.grab('green_block')
+blue_pos, blue_quat = pri.get_obj_pose('blue_block')
+transition_pos = blue_pos + np.array([0, 0, 0.1])
+pri.move(target_pos, blue_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+---
+
+[task description]
+Pick up a specified block and place it on the mug.
+[role thought]
+Fisrt to grab the specified block by `pri.grab()`, then calculate the transition_pos which is 0.15m above the stacked mug position, then move to the transition_pos and open the gripper, finally reset to initial pose by `reset_robot()`.
+[examples]
+#example1:
+user: stack the red block on the black mug.
+you:"```python
+# stack the red_block on the black_mug
+pri.grab('red_block')
+black_pos, black_quat = pri.get_obj_pose('black_mug')
+transition_pos = black_pos + np.array([0, 0, 0.15])
+pri.move(transition_pos,black_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+#example2:
+user: pick up the sky colored block and place it on the milk colored mug.
+you:"```python
+# sky is blue, milk is white, so sky colored block is blue_block, milk colored mug is white_mug
+# stack the blue_block on the white_mug
+pri.grab('blue_block')
+white_pos, white_quat = pri.get_obj_pose('white_mug')
+transition_pos = white_pos + np.array([0, 0, 0.15])
+pri.move(transition_pos,white_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+---
+
+[task description]
+Move or Place the specified block on a specified position.
+[role thought]
+Fisrt to grab the specified block by `pri.grab()`, then calculate the target_pos by `obj_pose + np.array([x,y,z])`,here [x,y,z] is the position you need to fill according to the instruction, they obey the following match:{'forward':'+x','backward or behind':'-x','left':'+y','right':'-y','above':'+z'}, then calculate the transition_pos which is 0.1m above the target_pos, then move to the transition_pos and open the gripper, finally reset to initial pose by `reset_robot()`.
+[examples]
+#example1
+user: "Move the red block 5cm right to the green block."
+you:"```python
+#pick up the red_block
+pri.grab('red_block')
+# calculate the target position and transition position, right is -y, so 5cm right is np.array([0, -0.05, 0])
+green_pos, green_quat = pri.get_obj_pose('green_block')
+target_pos = green_pos + np.array([0, -0.05, 0])
+transition_pos = target_pos + np.array([0, 0, 0.1])
+# move to the transition position then open the gripper
+pri.move(transition_pos, green_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+#example2
+user: "Move the blue block 10cm backward to the green block."
+you:"```python
+#pick up the blue_block
+pri.grab('blue_block')
+# calculate the target position and transition position, backward is -x, so 10cm backward is np.array([-0.1, 0, 0])
+green_pos, green_quat = pri.get_obj_pose('green_block')
+target_pos = green_pos + np.array([-0.1, 0, 0])
+transition_pos = target_pos + np.array([0, 0, 0.1])
+# move to the transition position then open the gripper
+pri.move(transition_pos, green_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+#example3
+user: "Pick up the blue block and position it 8cm right to the red block."
+you:"```python
+# pick up the blue_block
+pri.grab('blue_block')
+# calculate the target position and transition position, right is -y, so 8cm right is np.array([0, -0.08, 0])
+red_pos, red_quat = pri.get_obj_pose('red_block')
+target_pos = red_pos + np.array([0, -0.08, 0])
+transition_pos = target_pos + np.array([0, 0, 0.1])
+# move to the transition position then open the gripper
+pri.move(transition_pos, red_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+#example4
+user: "Pick up the banana colored block and position it 15cm front to the black mug."
+you:"```python
+# banana is yellow, so banana color block is yellow_block
+# pick up the yellow_block
+pri.grab('yellow_block')
+# calculate the target position and transition position, front is +x, so 15cm front is np.array([0.15, 0, 0])
+black_pos, black_quat = pri.get_obj_pose('black_mug')
+target_pos = black_pos + np.array([0.15, 0, 0])
+transition_pos = target_pos + np.array([0, 0, 0.1])
+# move to the transition position then open the gripper
+pri.move(transition_pos, black_quat)
+pri.gripper_ctrl('open')
+# reset the robot
+pri.reset_robot()```"
+---
+
+
+[task description]
+You can use the pri.say() func if the existing functions cannot solve user robot instructions:
+[role thought]
+No existing object or no matching apis to solve the user's instruction.
+[examples]
+#example1
+user:please write a word with the robotic arm.
+you:"```python
+pri.say('Sorry, I don't understand this instruction because I don't have any functions available in my library')```"
+---

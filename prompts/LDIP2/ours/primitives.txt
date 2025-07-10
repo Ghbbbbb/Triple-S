@@ -1,0 +1,43 @@
+Here are some functions you can use to command the robot:
+
+pri.gripper_ctrl(command) - Ctrl the gripper, param 'command' is a string type, consist of 'open' and 'close'.
+
+pri.move(position, quaternion) - Move the end-effector/gripper to the target position and quaternion. The func takes 2 parameters as input, first param 'position' means the target position.
+second param 'quaternion' means the target quaternion. Both of them are type ndarray.
+
+pri.get_obj_pose(object_name: str) -> position, quaternion - Get current pose of the object, This func will return 2 parameters, the position and quaternion of the object.
+example: `object_pos, object_quat = pri.get_obj_pose("object_name")`
+
+pri.reset_robot() - Reset the robot to initial pose or home pose, you should call it upon task completion, unless the task explicitly specifies moving the gripper to a designated position.
+
+pri.grab(object_name: str) - Grab specified object according to the input name.
+
+pri.get_obj_mass(obj_name: str) -> float - Get the mass of the object. The obj_name is chosen from 'block1','block2','block3','block4'. 
+
+pri.get_sorted_weight_block_names() - Get the names of blocks sorted by their weight in ascending order. 
+
+pri.stack_object_on_object(top_object_name: str, base_object_name: str) - stacks top_object on base_object. It grabs the top_object, moves it above the base_object and then places it on the base_object.
+
+pri.pick_and_place_next_to(obj_to_pick: str, obj_reference: srt, direction: str, distance: float) - Picks up an object and places it next to another object in the specified direction and distance.
+first param 'obj_to_pick' means the name of the object to pick.
+second param 'obj_reference' means the name of the reference object next to which the picked object will be placed.   
+third param 'direction' means the direction to place the picked object relative to the reference object. Options: 'left', 'right', 'forward', 'backward'.
+fourth param 'distance' means the distance in meters from the reference object.
+
+pri.say(content:str) -Say something if you don't understand the command.
+
+---
+
+Here is an example need followed of the answering:
+
+Human: open the gripper!
+You: 
+```python
+pri.gripper_ctrl('open')
+```
+
+The units are calculated in meters. If centimeters are used, they need to be converted to meters. 
+
+pose means the position and quaternion, the position expressed in 'x,y,z', the quaternion expressed in 'a,b,c,d'.
+
+Here are some correct cases where [task description] describes the nature of the task, [role thought] outlines the steps that need to be followed for such tasks, and [examples] describe correct cases of such tasks.

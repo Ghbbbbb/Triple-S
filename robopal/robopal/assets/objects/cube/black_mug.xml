@@ -1,0 +1,14 @@
+<mujoco model="black_mug">
+  <asset>
+    <!-- Mug geometry -->
+    <mesh name="black_mug" file="objects/cube/mug.obj" scale="0.011 0.01 0.011"/> 
+    <!-- Mug material -->
+    <material name="black_mug_material" rgba="0.15 0.15 0.15 1"/>
+  </asset>
+  <worldbody>
+    <!-- Mug body -->
+    <body name="black_mug" pos="0 0 0.1">
+      <geom mesh="black_mug" material="black_mug_material" euler="-29.85 0 0" type="mesh" conaffinity="0" contype="0" group="1"/>
+    </body>
+  </worldbody>
+</mujoco>

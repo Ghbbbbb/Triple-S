@@ -1,0 +1,175 @@
+[task description]
+Move the gripper to a special position and not grab anything.
+[role thought]
+First you need to get the obj_pose by `pri.get_obj_pose()`, then calculate the target_pos by `obj_pose + np.array([x,y,z])`,here [x,y,z] is the position you need to fill according to the instruction, they obey the following match:{'forward':'+x','backward or behind':'-x','left':'+y','right':'-y','above':'+z'}. finally move the gripper to target_pos by `pri.move()`.
+[examples]
+#example1
+user: please move the gripper 15cm to the top of the block that has the color of grass.
+you: "```python
+# grass color is green, so first to get the pose of green_block
+green_pos, green_quat = pri.get_obj_pose('green_block')
+# calculate the target position, then move to the target position, top is +z, so is np.array([0, 0, 0.15])
+target_pos = green_pos + np.array([0, 0, 0.15])
+pri.move(target_pos, green_quat)```"
+#example2
+user: Move the gripper 15cm to the left of the mug that has the night color.
+you:"```python
+# night color is balck, so first to get the pose of bloak_mug
+black_pos, black_quat = pri.get_obj_pose('black_mug')
+# calculate the target position, then move to the target position, left is +y, so is np.array([0, 0.15, 0])
+target_pos = black_pos + np.array([0, 0.15, 0])
+pri.move(target_pos, black_quat)```"
+#example3
+#example3
+user: Position the gripper 15cm forward of the no-corners block.
+you:"```python
+# no-corners is circle, so first to get the pose of circle_block
+circle_pos, circle_quat = pri.get_obj_pose('circle_block')
+# calculate the target position, then move to the target position, forward is +x, so is np.array([0.15, 0, 0])
+target_pos = circle_pos + np.array([0.15, 0, 0])
+pri.move(target_pos, circle_quat)```"
+---
+
+[task description]
+Move the gripper to more than one position and not grab anything.
+[role thought]
+Move the gripper to one position by `move_gripper_orientation()` function then repeat the process above until all positions have been reached.
+[examples]
+#example1
+user: Please move 8cm to your right, then 8cm to your front, then 8cm to your left, and finally 8cm to your back.
+you:"```python
+# move the gripper 8cm right
+pri.move_gripper_orientation('right', 0.08)
+# move the gripper 8cm front
+pri.move_gripper_orientation('forward', 0.08)
+# move the gripper 8cm left
+pri.move_gripper_orientation('left', 0.08)
+# move the gripper 8cm back
+pri.move_gripper_orientation('backward', 0.08)```"
+#example2
+user: Please move 10cm to your right, then open your claw, then move 15cm to the front, then close your gripper.
+you:"```python
+# move the gripper 10cm right
+pri.move_gripper_orientation('right', 0.1)
+# open the gripper
+pri.gripper_ctrl('open')
+# move the gripper 15cm front
+pri.move_gripper_orientation('forward', 0.15)
+# close the gripper
+pri.gripper_ctrl('close')```"
+---
+
+[task description]
+Pick up a specified block.
+[role thought]
+First you need to thought what block you need to pick(if the instuction has descriptive colors, you need to match the block to "red_block", "green_block", "yellow_block", "blue_block", if the instruction has distance information like "farthest", "cloest", you need to calculate the distances between objects), then grab it by `pri.grab()`, finally reset to initial pose by `reset_robot()`.
+[examples]
+#example1
+user: please pick up the red block.
+you:"```python
+# pick up the red_block
+pri.grab('red_block')
+# reset the robot
+pri.reset_robot()```"
+#example2
+user: grab the 180°-interior angles block.
+you:"```python
+# 180°-interior angles is triangle, so pick up the triangle_block
+pri.grab('triangle_block')
+# reset the robot
+pri.reset_robot()```"
+#example3
+user: please pick up the block that is the cloest to the yellow block
+you:"```python
+# calculate the pose of red_block, blue_block， green_block, yellow_block
+red_pos, red_quat = pri.get_obj_pose('red_block')
+blue_pos, blue_quat = pri.get_obj_pose('blue_block')
+green_pos, green_quat = pri.get_obj_pose('green_block')
+yellow_pos, yellow_quat = pri.get_obj_pose('yellow_block')
+# calculate the distance between yellow_block and other blocks
+distances={'blue_block':np.linalg.norm(yellow_pos-blue_pos),'green_block':np.linalg.norm(yellow_pos-green_pos),'red_block':np.linalg.norm(yellow_pos-red_pos)}
+sorted_distances = sorted(distances.items(), key=lambda item:item[1])
+# get the cloest block
+cloest_obj = sorted_distances[0][0]
+# pick up the cloest block
+pri.grab(cloest_obj)
+# reset the robot
+pri.reset_robot()```"
+#example4
+user: please pick up the block that is the cloest to the circle block
+you:"```python
+#calculate the pose of square_block, hexagon_block, triangle_block, circle_block
+square_pos, square_quat = pri.get_obj_pose('square_block')
+hexagon_pos, hexagon_quat = pri.get_obj_pose('hexagon_block')
+triangle_pos, triangle_quat = pri.get_obj_pose('triangle_block')
+circle_pos, circle_quat = pri.get_obj_pose('circle_block')
+# calculate the distance between circle_block and other blocks
+distances={'square_block':np.linalg.norm(circle_pos-square_pos),'hexagon_block':np.linalg.norm(circle_pos-hexagon_pos),'triangle_block':np.linalg.norm(circle_pos-triangle_pos)}
+sorted_distances = sorted(distances.items(), key=lambda item:item[1])
+# get the cloest block
+cloest_obj = sorted_distances[0][0]
+# pick up the cloest block
+pri.grab(cloest_obj)
+# reset the robot
+pri.reset_robot()```"
+---
+
+[task description]
+Stack the specified block on the specified blocks or mugs.
+[role thought]
+Use the `stack_object_on_object()` function to stack the block on blocks or mugs, then reset to initial pose by `reset_robot()`.
+[examples]
+#example1
+user: "Stack the red_block on the black_mug then stack the circle_block on the white_mug."
+you: "```python
+# stack the red_block on the black_mug
+pri.stack_object_on_object('red_block', 'black_mug')
+# stack the circle_block on the white_mug
+pri.stack_object_on_object('circle_block', 'white_mug')
+# reset the robot
+pri.reset_robot()```"
+#example2
+user: "Stack the blue, hexagon and triangle blocks on top of the red block in order."
+you:"```python
+# stack the blue_block on the red_block
+pri.stack_object_on_object('blue_block', 'red_block')
+# stack the hexagon_block on the blue_block
+pri.stack_object_on_object('hexagon_block', 'blue_block')
+# stack the triangle_block on the hexagon_block
+pri.stack_object_on_object('triangle_block', 'hexagon_block')
+# reset the robot
+pri.reset_robot()```"
+---
+
+[Task Description]
+Pick up the block and place it relative to another object in a specified direction and distance.
+[role thought]
+Use the `pick_and_place_next_to()` function to pick up an object and place it in relation to another object, then reset to initial pose by `reset_robot()`.
+[examples]
+#example1
+user: "Move the circle block 10cm backward to the green block."
+you:"```python
+#move the circle_block 10cm backward to the green_block.
+pri.pick_and_place_next_to('circle_block', 'green_block', 'backward', 0.1)
+# reset the robot
+pri.reset_robot()```"
+#example2
+user: "Pick up the blue block and position it 8cm right to the square block."
+you:"```python
+# Move the blue_block 8cm right to the square_block
+pri.pick_and_place_next_to('blue_block', 'square_block', 'right', 0.08)
+# reset the robot
+pri.reset_robot()```"
+---
+
+
+[task description]
+You can use the pri.say() func if the existing functions cannot solve user robot instructions:
+[role thought]
+No existing object or no matching apis to solve the user's instruction.
+[examples]
+#example1
+user:please write a word with the robotic arm.
+you:"```python
+pri.say('Sorry, I don't understand this instruction because I don't have any functions available in my library')```"
+---

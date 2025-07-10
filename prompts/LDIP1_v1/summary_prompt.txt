@@ -1,0 +1,145 @@
+You are now an API encapsulation robot. Your task is to create new APIs based on the functions of existing APIs for the new tasks provided by the user. Additionally, you need to provide some examples of the new APIs. 
+It is important to note that the new APIs must be permutations and combinations of the existing APIs.
+
+And you are working in a room, where exists a robotic arm with a two-finger gripper on its end, and a workbench with 
+four different colored blocks and two mugs randomly placed on it, respectively called 'red_block', 'blue_block', 'green_block', 'yellow_block', 'white_mug' and 'black_mug'.
+
+Here are some existing apis:
+
+class pri:
+    def reset_robot(self):
+        """
+        Reset the robot to initial pose, you should call it upon task completion, unless the task explicitly specifies moving the gripper to a designated position.
+        """
+        self.move(self.init_pos, self.init_rot)
+
+    def get_obj_pose(self, obj_name):
+        """
+        Get current pose of the object, This func will return 2 parameters, the position and quaternion of the object. 
+        Example: `object_pos, object_quat = pri.get_obj_pose("object_name")`
+        """
+        pos = self.mj_data.body(obj_name).xpos.copy()
+        pos[2] -= 0.31
+        quat = self.mj_data.body(obj_name).xquat.copy()
+        return pos, quat
+
+    def move(self, pos, quat):
+        """
+        Move the end-effector/gripper to the target position and quaternion. The func takes 2 parameters as input, first param 'position' means the target position.
+        second param 'quaternion' means the target quaternion. Both of them are type ndarray.
+        """
+        start_time = time.time()
+        def checkArriveState(state):
+            current_pos, current_quat = self.get_current_pose()
+            error = 2*np.sum(np.abs(state[:3] - current_pos)) + np.sum(np.abs(state[3:] - current_quat)/2.5)
+            end_time = time.time()
+            elapsed_time  = end_time - start_time
+            # print("time:",elapsed_time)
+            if error <= 0.05 or elapsed_time  > 30:
+                return True
+            return False
+        while True:
+            self.action = np.concatenate((pos, quat), axis=0)
+            self.step(self.action)
+            if self.render_mode == "human":
+                self.render()
+            if checkArriveState(self.action):
+                break
+
+    def grab(self, obj_name):
+        """
+        Grab specified object according to the input name.
+        """
+        self.gripper_ctrl("open")
+        obj_pos, obj_quat = self.get_obj_pose(obj_name)
+        self.move(np.add(obj_pos, np.array([0, 0, 0.1])), obj_quat)
+        self.move(obj_pos, obj_quat)
+        self.gripper_ctrl("close")
+        end_pos, end_quat = self.get_current_pose()
+        self.move(np.add(end_pos, np.array([0, 0, 0.1])), end_quat)
+
+    def gripper_ctrl(self, cmd: str):
+        """
+        Ctrl the gripper, param 'command' is a string type, consist of 'open' and 'close'.
+        """
+        if cmd == "open":
+            self.mj_data.actuator("0_gripper_l_finger_joint").ctrl = 20
+        elif cmd == "close":
+            self.mj_data.actuator("0_gripper_l_finger_joint").ctrl = -20
+        step = 0
+        while True:
+            step += 1
+            self.step(self.action)
+            if self.render_mode == "human":
+                self.render()
+            if step > 100:
+                break
+
+    def get_current_pose(self):
+        """
+        Get current pose of the gripper, This func will return 2 parameters, the position and quaternion of the end gripper.
+        """
+        return self.controller.forward_kinematics(self.robot.get_arm_qpos())
+
+
+The units are calculated in meters. If centimeters are used, they need to be converted to meters. 
+pose means the position and quaternion, the position expressed in 'x,y,z', the quaternion expressed in 'a,b,c,d'.
+
+Next, I will give you a correct example for you to learn:
+
+Example 1:
+User: Move the gripper 5cm left then move the gripper 10cm forward.
+Robot: "```python
+current_pos, current_quat = pri.get_current_pose()
+target_pos = current_pos + np.array([0, 0.05, 0])
+pri.move(target_pos, current_quat)
+current_pos, current_quat = pri.get_current_pose()
+target_pos = current_pos + np.array([0.1, 0, 0])
+pri.move(target_pos, current_quat)
+```"
+New API: "
+    def move_gripper_orientation(self,direction,distance):
+        """
+        This function moves the gripper to the corresponding position based on direction and distance. The direction is chosen from 'forward', 'backward', 'left', 'right', 'upward', 'downward', and the distance is measured in centimeters.
+        """
+        current_pos, current_quat = self.get_current_pose()  
+        direction_map = {
+            'forward': np.array([1, 0, 0]),
+            'backward': np.array([-1, 0, 0]),
+            'left': np.array([0, 1, 0]),
+            'right': np.array([0, -1, 0]),
+            'upward': np.array([0, 0, 1]),
+            'downward': np.array([0, 0, -1])
+        }
+        if direction in direction_map:
+            move_vector = direction_map[direction] * distance
+        else:
+            raise ValueError("Invalid direction")
+        target_pos = current_pos + move_vector
+        self.move(target_pos, current_quat)
+"
+New API examples:
+[task description]
+move the gripper to a specified position.
+[thought]
+Call `move_gripper_orientation()` func to move the gripper to a specified position.
+[examples]
+#example1
+User: "Move the gripper 5cm left then move the gripper 10cm forward."
+Robot: "```python
+pri.move_gripper_orientation("left",0.05)
+pri.move_gripper_orientation("forward",0.1)
+```"
+#example2
+User: "Please move 20 cm to the left, then 15cm in front of you, and finally 10cm to the right."
+Robot: "```python
+pri.move_gripper_orientation("left",0.2)
+pri.move_gripper_orientation("forward",0.15)
+pri.move_gripper_orientation("right",0.1)
+```"
+
+For each task, you need to analyze the existing User-Robot dialogue and then re-encapsulate the APIs in the Robot dialogue. Through the re-encapsulated APIs, the user's tasks can be accomplished more easily.
+You need to output the New API and New API examples.The New API is a simplified implementation for the user's task. And the New API examples consist of [task description], [thought], and [examples]. [task description] describes the commonality of this type of task, [thought] explains how to complete this type of task, and [examples] provide the new user-robot dialogues by the new APIs you have encapsulated. You need to provide at least two examples.
+It is important to note that the new API you encapsulate must serve the current user's question.
+
+Now, please first to output the New API and then New API examples for the following task:

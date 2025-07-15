@@ -1,6 +1,6 @@
 <mujoco>
     <asset>
-        <texture name="block1_texture" type="2d" file="textures/1.png" />
+        <texture name="block1_texture" type="2d" file="textures/box.png" />
         <material name="block1_material" texture="block1_texture" />
     </asset>
 

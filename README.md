@@ -74,3 +74,19 @@ Each of these contributions has been pivotal in shaping our work. We're incredib
 ## 📄 License 
 
 Our project is open-sourced under the MIT license. Feel free to explore, modify, and share your innovations with the world.
+
+
+## Citation
+
+If you find our repository useful, please consider citing us as
+```bash
+@misc{jia2025triplescollaborativemultillmframework,
+      title={Triple-S: A Collaborative Multi-LLM Framework for Solving Long-Horizon Implicative Tasks in Robotics}, 
+      author={Zixi Jia and Hongbin Gao and Fashe Li and Jiqiang Liu and Hexiao Li and Qinghua Liu},
+      year={2025},
+      eprint={2508.07421},
+      archivePrefix={arXiv},
+      primaryClass={cs.RO},
+      url={https://arxiv.org/abs/2508.07421}, 
+}
+```
